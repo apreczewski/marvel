@@ -1,11 +1,11 @@
 import styled, { keyframes } from 'styled-components';
-import image from '../../assets/images/image01.jpg'
+import image from '../../assets/images/image00.jpg'
 import { shade } from 'polished';
 
-const appearFromLeft = keyframes`
+const appearFromTop = keyframes`
   from {
     opacity: 0;
-    transform: translateX(-90%);
+    transform: translateX(90%);
   }
 
   to {
@@ -40,7 +40,7 @@ export const AnimationContainer = styled.div`
   align-items: center;
   justify-content: center;
 
-  animation: ${appearFromLeft} 2s;
+  animation: ${appearFromTop} 2s;
 
   > img {
     width: 350px;

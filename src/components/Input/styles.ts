@@ -10,12 +10,12 @@ interface ContainerProps {
 }
 
 export const Container = styled.div<ContainerProps>`
-
-  padding: 16px;
-  width: 100%;
-
-  border-bottom: 1px solid ${colors.charcoalGrey};
-  color: ${colors.charcoalGreyTwo};
+  background: #ffffff;
+  border-radius: 50px;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-style: normal;
 
   display: flex;
   align-items: center;
@@ -27,14 +27,14 @@ export const Container = styled.div<ContainerProps>`
   ${props =>
     props.isErrored &&
     css`
-      border-color: #c53030;
+      border-color:  #15a38a;
     `}
 
   ${props =>
     props.isFocused &&
     css`
       color: ${colors.mediumPink};
-      border-color: ${colors.mediumPink};
+      border-color: ${colors.greenyBlue};
     `}
 
   ${props =>
@@ -43,13 +43,20 @@ export const Container = styled.div<ContainerProps>`
       color: ${colors.mediumPink};
     `}
 
-
+  :hover {
+    box-shadow: 2px 2px 8px rgba(35, 211, 199, 0.2);
+  }
 
   input {
     flex: 1;
     background: transparent;
     border: 0;
+    width: 130px;
+    height: 35px;
+    padding: 10px 15px;
     color: ${colors.charcoalGreyTwo};
+    font-size: 12px;
+    text-align: center;
 
     &::placeholder {
       color: ${colors.charcoalGreyTwo};
@@ -69,11 +76,11 @@ export const Error = styled(Tooltip)`
   }
 
   span {
-    background: #c53030;
+    background: #15a38a;
     color: #fff;
 
     &::before {
-      border-color: #c53030 transparent;
+      border-color:  #15a38a transparent;
     }
   }
 `;

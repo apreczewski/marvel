@@ -1,26 +1,18 @@
-import React, { useCallback, useRef, useState } from 'react';
-import { FiMail, FiLock } from 'react-icons/fi';
+import React, { useCallback, useRef } from 'react';
+import { FiLogIn, FiMail, FiLock } from 'react-icons/fi'
+import logo from '../../assets/images/logo.png'
+import Input from '../../components/imputs/Input';
+import Button from '../../components/buttons/Default';
+import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
-import * as Yup from 'yup';
-import { useHistory } from 'react-router-dom';
+import { getValidationError } from '../../utils/getValidationError';
+import { Link, useHistory } from 'react-router-dom';
 
-import { AiOutlineLoading3Quarters } from 'react-icons/ai';
-import Input from '../../components/Input';
-import Button from '../../components/Button';
-
-import getValidationsErrors from '../../utils/getValidationErrors';
-import { useEndpoints } from '../../hooks/endpoints';
+import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
-import logoHome from '../../assets/images/logo-home.png';
 
-import {
-  Container,
-  Content,
-  AnimationContainer,
-  Header,
-  Loading,
-} from './styles';
+import { Background, Container, AnimationContainer, Content } from './styles';
 
 interface SignInFormData {
   email: string;
@@ -28,80 +20,74 @@ interface SignInFormData {
 }
 
 const SignIn: React.FC = () => {
-  const history = useHistory();
-  const { signIn } = useEndpoints();
-  const { addToast } = useToast();
   const formRef = useRef<FormHandles>(null);
-  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = useCallback(
-    async (data: SignInFormData) => {
-      try {
-        setLoading(true);
-        formRef.current?.setErrors({});
-        const schema = Yup.object().shape({
-          email: Yup.string()
-            .required('E-mail obrigatório!')
-            .email('Digite um e-mail válido!'),
-          password: Yup.string().min(6, 'No mínimo 6 dígitos'),
-        });
+  const { signIn, loadingSignIn } = useAuth();
+  const { addToast } = useToast();
 
-        await schema.validate(data, {
-          abortEarly: false,
-        });
+  const history = useHistory();
 
-        await signIn({ ...data });
-        setLoading(false);
-        history.push('/dashboard');
-      } catch (err) {
-        if (err instanceof Yup.ValidationError) {
-          const errors = getValidationsErrors(err);
-          formRef.current?.setErrors(errors);
-        }
+  const handleSubmit = useCallback(async (data: SignInFormData) => {
+    try {
+      formRef.current?.setErrors({});
+      const { email, password } = data;
 
-        addToast({
-          type: 'error',
-          title: 'Erro na autenticação!',
-          description: 'Ocorreu um erro ao fazer login, cheque as credenciais.',
-        });
+      const shema = Yup.object().shape({
+        email: Yup.string().required('E-mail obrigatório').email('Digite um e-mial válido'),
+        password: Yup.string().required('Senha obrigatório'),
+      });
 
-        setLoading(false);
+      await shema.validate(data, {
+        abortEarly: false
+      });
+
+      await signIn({
+        email,
+        password,
+      });
+
+      history.push('/dashboard');
+    } catch (error) {
+      console.log('errorrr ')
+      if (error instanceof Yup.ValidationError) {
+        const errors = getValidationError(error);
+        formRef.current?.setErrors(errors);
       }
-    },
-    [history, signIn, addToast],
-  );
+      addToast({
+        type: 'error',
+        title: 'Error on autentication',
+        description: 'There was an error signing in, check your credentials'
+      })
+    }
+  }, [signIn, addToast, history]);
 
   return (
     <Container>
       <Content>
-        <AnimationContainer>
-          <img src={logoHome} alt="logo home" />
-          <Header>
-            <h2>BEM-VINDO AO EMPRESAS</h2>
-            <p>
-              Lorem ipsum dolor sit amet, contetur adipiscing elit. Nunc
-              accumsan.
-            </p>
-          </Header>
-          <Form ref={formRef} onSubmit={handleSubmit}>
-            <Input name="email" placeholder="E-mail" icon={FiMail} />
-            <Input
-              name="password"
-              type="password"
-              placeholder="Senha"
-              icon={FiLock}
-            />
-            <Button type="submit">Entrar</Button>
-          </Form>
-        </AnimationContainer>
-        {loading && (
-          <Loading>
-            <AiOutlineLoading3Quarters className="outlineLoading" size={120} />
-          </Loading>
+        {loadingSignIn && (<span>loading...</span>)}
+        {!loadingSignIn && (
+          <AnimationContainer>
+            <img src={logo} alt="logo" />
+
+            <Form ref={formRef} onSubmit={handleSubmit}>
+              <h1>Faça seu login</h1>
+
+              <Input name="email" icon={FiMail} type="text" placeholder="E-mail" />
+              <Input name="password" icon={FiLock} type="password" placeholder="Senha" />
+              <Button type="submit">Entrar</Button>
+
+              <a href="forgot">Esqueci minha senha</a>
+            </Form>
+            <Link to="/signup">
+              <FiLogIn />
+              <span>Criar Conta</span>
+            </Link>
+          </AnimationContainer>
         )}
       </Content>
+      <Background />
     </Container>
-  );
-};
+  )
+}
 
 export default SignIn;
