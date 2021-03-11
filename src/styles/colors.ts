@@ -1,4 +1,12 @@
 export default {
+
+  /** @property  '#043E50' */
+  default: '#043E50',
+
+  /** @property  '#069581' */
+  _default: '#069581',
+
+
   /** @property  '#d8d8d8' */
   white: '#d8d8d8',
 

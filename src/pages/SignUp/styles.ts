@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import image from '../../assets/images/image00.jpg'
+import image from '../../assets/pexels-eunice-lui-931887.jpg'
 import { shade } from 'polished';
 
 const appearFromTop = keyframes`

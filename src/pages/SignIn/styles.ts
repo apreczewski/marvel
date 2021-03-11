@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import image from '../../assets/images/image01.jpg'
+import image from '../../assets/sign-in-background.jpg';
 import { shade } from 'polished';
 
 const appearFromLeft = keyframes`

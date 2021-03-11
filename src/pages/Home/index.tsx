@@ -1,5 +1,6 @@
 import React, { useCallback, useRef, useState, useEffect } from 'react';
 import { uuid } from 'uuidv4';
+import { useTranslation } from 'react-i18next';
 import { formatNumber } from '../../utils/format';
 
 import { FormHandles } from '@unform/core';
@@ -11,7 +12,7 @@ import TagValue from '../../components/TagValue';
 
 import {
   Wrapper, Container, Background, Header, ListTags, FirstItem,
-  HideButtonHeader, AnchorHider, Body, BtnAddUser,
+  Division, BtnHide, Body, BtnAddUser,
   ListUsers
 } from './styles';
 import Input from '../../components/Input';
@@ -36,21 +37,27 @@ interface ValueData {
 
 const Home: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
-
   const [isExpandHeader, setIsExpandHeader] = useState(false);
-  const [arrayOfUsers, setArrayOfUsers] = useState<UserData[]>([]);
-  const [arrayOfValues, setArrayOfValues] = useState<ValueData[]>([]);
+  const [arrayOfUsers, setArrayOfUsers] = useState<UserData[]>([{
+    id: uuid(),
+    description: '',
+    values: [],
+    sumTotal: '',
+    valueMedium: '',
+  }]);
+  const [arrayOfValues, setArrayOfValues] = useState<ValueData[]>([{
+    id: uuid(),
+    value: '545',
+  }]);
+
+  const { t } = useTranslation();
 
   const handleAddNewValue = useCallback(({ addValue }) => {
-    console.log('formRef >> ', formRef.current);
-
-    // formRef.current?.clearField(fieldName = '');
-
-
     const newValue: ValueData = {
       id: uuid(),
       value: addValue,
     }
+
     setArrayOfValues([newValue, ...arrayOfValues])
 
     formRef.current?.clearField('addValue');
@@ -92,7 +99,7 @@ const Home: React.FC = () => {
       <Container>
         <Header isExpandHeader={isExpandHeader}>
           <Form ref={formRef} onSubmit={handleAddNewValue}>
-            <Input name="addValue" placeholder="Add value" />
+            <Input name="addValue" placeholder={t("Add value")} />
           </Form>
           {arrayOfValues &&
             <ListTags>
@@ -102,14 +109,14 @@ const Home: React.FC = () => {
               ))}
             </ListTags>
           }
-          <AnchorHider>
-            <HideButtonHeader onClick={() => handleExpandHeader(!isExpandHeader)}>
-              {!isExpandHeader && <FaAngleDoubleDown size={10} />}
-              {isExpandHeader && <FaAngleDoubleUp size={10} />}
-              {/* <TotalValues>{`R$ ${formatCurrency(sumValues.toString(), 'BRL', 'pt-BR')}`}</TotalValues> */}
-            </HideButtonHeader>
-          </AnchorHider>
         </Header>
+        <Division>
+          <BtnHide onClick={() => handleExpandHeader(!isExpandHeader)}>
+            {!isExpandHeader && <FaAngleDoubleDown size={10} />}
+            {isExpandHeader && <FaAngleDoubleUp size={10} />}
+            {/* <TotalValues>{`R$ ${formatCurrency(sumValues.toString(), 'BRL', 'pt-BR')}`}</TotalValues> */}
+          </BtnHide>
+        </Division>
         <Body isExpandHeader={isExpandHeader}>
           {arrayOfUsers &&
             <ListUsers isExpandHeader={isExpandHeader}>
@@ -118,7 +125,6 @@ const Home: React.FC = () => {
               ))}
             </ListUsers>
           }
-          {/* <ButtonAddUser onClick={handleAddUser}> */}
           <BtnAddUser onClick={handleAddNewUser}>
             <FaPlus size={15} />
           </BtnAddUser>

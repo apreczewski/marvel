@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
+  position: relative;
   height: 55px;
-  width: 200px;
+  width: 100%;
   display: flex;
   align-items: center;
-  padding: 0 5px;
+  padding: 5px;
   border-bottom: 1px solid #EEF2F5;
 `;
 
@@ -22,6 +23,7 @@ export const Image = styled.div`
 
   svg {
     font-size: 16px;
+    color: blue;
   }
 `;
 
@@ -42,11 +44,16 @@ export const Name = styled.div`
   overflow: hidden;
 `;
 
-export const AddUser = styled.div`
+export const AddUser = styled.button`
   display: flex;
+  justify-content: center;
   align-items: center;
   margin-top: 5px;
   color: #6C63FF;
+
+  border: none;
+  background: none;
+  text-decoration: none;
 
   svg {
     font-size: 12px;
@@ -64,19 +71,22 @@ export const AddUser = styled.div`
 `;
 
 export const Close = styled.div`
-  svg {
-    color: red;
-  }
-
+  position: absolute;
   width: 20px;
   height: 20px;
-  border-radius: 50px;
   padding: 3px;
+  border-radius: 50px;
+
   display: flex;
   justify-content: center;
   align-items: center;
 
+  right: 5px;
   cursor: pointer;
+
+  svg {
+    color: red;
+  }
 
   :hover {
     width: 20px;

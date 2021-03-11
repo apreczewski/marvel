@@ -1,9 +1,10 @@
 import { shade } from 'polished';
 import styled from 'styled-components';
+import colors from '../../../styles/colors';
 
 export const Container = styled.div`
   > button {
-    background: #D31145;
+    background: ${colors.default};
     width: 100%;
     height: 56px;
     border-radius: 9px;
@@ -16,7 +17,7 @@ export const Container = styled.div`
     transition: background-color 0.2s;
 
     &:hover {
-      background: ${shade(0.2, '#D31145')};
+      background: ${shade(0.2, `${colors.default}`)};
     }
 
     @media (max-width: 1400px) {

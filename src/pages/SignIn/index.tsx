@@ -1,6 +1,7 @@
 import React, { useCallback, useRef } from 'react';
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi'
-import logo from '../../assets/images/logo.png'
+import { useTranslation } from 'react-i18next';
+
 import Input from '../../components/imputs/Input';
 import Button from '../../components/buttons/Default';
 import * as Yup from 'yup';
@@ -21,11 +22,11 @@ interface SignInFormData {
 
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
-
   const { signIn, loadingSignIn } = useAuth();
   const { addToast } = useToast();
-
   const history = useHistory();
+
+  const { t } = useTranslation();
 
   const handleSubmit = useCallback(async (data: SignInFormData) => {
     try {
@@ -67,20 +68,20 @@ const SignIn: React.FC = () => {
         {loadingSignIn && (<span>loading...</span>)}
         {!loadingSignIn && (
           <AnimationContainer>
-            <img src={logo} alt="logo" />
+            {/* <img src={logo} alt="logo" /> */}
 
             <Form ref={formRef} onSubmit={handleSubmit}>
-              <h1>Faça seu login</h1>
+              <h1>{t('Faça seu login')}</h1>
 
               <Input name="email" icon={FiMail} type="text" placeholder="E-mail" />
               <Input name="password" icon={FiLock} type="password" placeholder="Senha" />
-              <Button type="submit">Entrar</Button>
+              <Button type="submit">{t('Entrar')}</Button>
 
-              <a href="forgot">Esqueci minha senha</a>
+              <a href="forgot">{t('Esqueci minha senha')}</a>
             </Form>
             <Link to="/signup">
               <FiLogIn />
-              <span>Criar Conta</span>
+              <span>{t('Criar Conta')}</span>
             </Link>
           </AnimationContainer>
         )}

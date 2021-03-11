@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-// import TagValue from '../components/TagValue'
 
 export const Wrapper = styled.div`
   position: relative;
@@ -10,7 +9,6 @@ export const Wrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background: #a1b0a8;
 `;
 
 export const Background = styled.div`
@@ -21,7 +19,6 @@ export const Background = styled.div`
 
 export const Container = styled.div`
   position: absolute;
-  /* position: absolute; */
   height: 30rem;
   width: 60.1rem;
   top: 5rem;
@@ -100,33 +97,13 @@ export const ListTags = styled.div`
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #333;
+    background: #7a7a7a;
     border-radius: 25px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #999;
+    background: #7a7a7a;
   }
-`;
-
-export const Body = styled.div<ExpandProps>`
-  position: relative;
-  width: 100%;
-  ${p => (p.isExpandHeader ? css`
-    height: calc(100% - 125px);
-  ` : css`
-    height: calc(100% - 60px);
-  `
-  )}
-
-  background: #ececec;
-  border-bottom-left-radius: 9px;
-  border-bottom-right-radius: 9px;
-  padding: 5px 0 5px 5px;
-  display: flex;
-  flex-direction: row;
-
-  transition: height 0.8s ease-out;
 `;
 
 export const BtnAddUser = styled.button`
@@ -178,42 +155,33 @@ export const BtnAddUser = styled.button`
   }
 `;
 
-export const AnchorHider = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const TotalValues = styled.div`
-  /* font-size: 16px; */
-  color: #7a7a7a;
-  font-weight: bold;
-`;
-
-export const ButtonHide = styled.div`
-  width: 130px;
-  height: 25px;
+export const BtnBase = styled.button`
+  width: 15px;
+  height: 15px;
   background: #ffffff;
-  border: 0.5px solid rgba(230, 230, 227, 1);
+  border: none;
+  text-decoration: none;
+
+  border-radius: 50px;
+  font-size: 10px;
 
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 10px;
-  border-radius: 25px;
   z-index: 2;
-
   color: #7a7a7a;
 
   svg {
-    margin-right: 5px;
     color: #7a7a7a;
   }
 
   :hover {
     cursor: pointer;
     background: rgba(230, 230, 227, 1);
+
+    svg {
+      color: #15a38a;
+    }
   }
 
   :active {
@@ -223,12 +191,47 @@ export const ButtonHide = styled.div`
   }
 `;
 
-export const HideButtonHeader = styled(ButtonHide)`
-  position: absolute;
-  bottom: -15px;
+export const Division = styled.div`
+  width: 100%;
+  height: 15px;
+  background: #ffffff;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
-export const HideButtonFooter = styled(ButtonHide)`
+export const BtnHide = styled(BtnBase)`
+  width: 50px;
+`;
+
+export const TotalValues = styled.div`
+  color: #7a7a7a;
+  font-weight: bold;
+`;
+
+
+export const Body = styled.div<ExpandProps>`
+  position: relative;
+  width: 100%;
+  ${p => (p.isExpandHeader ? css`
+    height: calc(100% - 125px);
+  ` : css`
+    height: calc(100% - 60px);
+  `
+  )}
+
+  background: #ececec;
+  border-bottom-left-radius: 9px;
+  border-bottom-right-radius: 9px;
+  padding: 0 0 5px 5px;
+  display: flex;
+  flex-direction: row;
+
+  transition: height 0.8s ease-out;
+`;
+
+export const HideButtonFooter = styled(BtnBase)`
   position: absolute;
   height: 30px;
   bottom: 0;
@@ -246,8 +249,7 @@ export const ListUsers = styled.div<ExpandProps>`
   grid-gap: 9px;
   justify-content: flex-start;
   overflow: auto;
-
-  /* grid-template-areas: 'avalue avalue'; */
+  padding: 5px 0;
 
   ::-webkit-scrollbar {
     width: 9px;
