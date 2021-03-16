@@ -19,7 +19,7 @@ export const Background = styled.div`
 
 export const Container = styled.div`
   position: absolute;
-  height: 30rem;
+  height: 28rem;
   width: 60.1rem;
   top: 5rem;
   border-radius: 9px;
@@ -27,7 +27,8 @@ export const Container = styled.div`
   box-shadow: -16px -16px 82px rgba(255, 255, 255, 0.15),
     26px 26px 82px rgba(20, 43, 88, 0.1);
 
-  @media (max-width: 1500px) {
+  @media (max-width: 1200px) {
+    height: 50rem;
   }
 `;
 

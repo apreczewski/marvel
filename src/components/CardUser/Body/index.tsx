@@ -1,11 +1,8 @@
 import React from 'react';
-
+import { UserProps } from '../../../hooks/users'
 import { Wrapper } from './styles';
 
-import { CardUserData } from '../index'
-
-
-const Body: React.FC<CardUserData> = ({ values, handleRemoveValueFromUser }) => {
+const Body: React.FC<UserProps> = ({ values }) => {
 
   return (
     <Wrapper>

@@ -34,7 +34,7 @@ const SignUp: React.FC = () => {
       const errors = getValidationError(error);
       formRef.current?.setErrors(errors);
     }
-  }, []);
+  }, [t]);
 
   return (
     <Container>
@@ -55,7 +55,7 @@ const SignUp: React.FC = () => {
           </Form>
           <Link to="/">
             <FiArrowLeft />
-            {t('go to back')}
+            {t('go back')}
           </Link>
         </AnimationContainer>
       </Content>

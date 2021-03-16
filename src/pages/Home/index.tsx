@@ -1,7 +1,10 @@
-import React, { useCallback, useRef, useState, useEffect } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { uuid } from 'uuidv4';
+import { useValues } from '../../hooks/values';
+import { useUsers } from '../../hooks/users';
+
 import { useTranslation } from 'react-i18next';
-import { formatNumber } from '../../utils/format';
+// import { formatNumber } from '../../utils/format';
 
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
@@ -18,71 +21,26 @@ import {
 import Input from '../../components/Input';
 import CardUser from '../../components/CardUser';
 
-interface UserData {
-  id: string,
-  description: string,
-  values: string[],
-  sumTotal: string,
-  valueMedium: string,
-}
-
-interface ValueData {
-  id: string,
-  value: string,
-  description?: string,
-  users?: string[],
-  valueMedium?: string,
-}
-
-
 const Home: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const [isExpandHeader, setIsExpandHeader] = useState(false);
-  const [arrayOfUsers, setArrayOfUsers] = useState<UserData[]>([{
-    id: uuid(),
-    description: '',
-    values: [],
-    sumTotal: '',
-    valueMedium: '',
-  }]);
-  const [arrayOfValues, setArrayOfValues] = useState<ValueData[]>([{
-    id: uuid(),
-    value: '545',
-  }]);
+  const { values, addValue } = useValues();
+  const { users, addUser } = useUsers();
 
   const { t } = useTranslation();
 
-  const handleAddNewValue = useCallback(({ addValue }) => {
-    const newValue: ValueData = {
-      id: uuid(),
-      value: addValue,
+  const handleAddNewValue = useCallback(({ value }) => {
+    console.log('value >> ', value);
+
+    if (!!value) {
+      addValue({ id: uuid(), value });
+      formRef.current?.clearField('value');
     }
+  }, [addValue]);
 
-    setArrayOfValues([newValue, ...arrayOfValues])
-
-    formRef.current?.clearField('addValue');
-  }, [arrayOfValues]);
-
-  const handleRemoveValue = useCallback((idValue) => {
-    const newValues = arrayOfValues.filter(value => value.id !== idValue);
-    setArrayOfValues(newValues);
-  }, [arrayOfValues]);
-
-  const handleAddNewUser = useCallback(({ addUser }) => {
-    const newUser: UserData = {
-      id: uuid(),
-      description: '',
-      values: [],
-      sumTotal: '',
-      valueMedium: '',
-    }
-    setArrayOfUsers([...arrayOfUsers, newUser])
-  }, [arrayOfUsers]);
-
-  const handleRemoveUser = useCallback((idUser) => {
-    const newUsers = arrayOfUsers.filter(user => user.id !== idUser);
-    setArrayOfUsers(newUsers);
-  }, [arrayOfUsers]);
+  const handleAddNewUser = useCallback(() => {
+    addUser({ id: uuid() });
+  }, [addUser]);
 
   const handleExpandHeader = useCallback((status) => {
     if (status) {
@@ -99,13 +57,13 @@ const Home: React.FC = () => {
       <Container>
         <Header isExpandHeader={isExpandHeader}>
           <Form ref={formRef} onSubmit={handleAddNewValue}>
-            <Input name="addValue" placeholder={t("Add value")} />
+            <Input name="value" placeholder={t("add value")} />
           </Form>
-          {arrayOfValues &&
+          {values &&
             <ListTags>
               <FirstItem />
-              {arrayOfValues.reverse().map((itemValue) => (
-                <TagValue key={uuid()} handleRemoveValue={handleRemoveValue} {...itemValue} />
+              {values.reverse().map((itemValue) => (
+                <TagValue key={uuid()} {...itemValue} />
               ))}
             </ListTags>
           }
@@ -118,10 +76,10 @@ const Home: React.FC = () => {
           </BtnHide>
         </Division>
         <Body isExpandHeader={isExpandHeader}>
-          {arrayOfUsers &&
+          {users &&
             <ListUsers isExpandHeader={isExpandHeader}>
-              {arrayOfUsers.reverse().map((user) => (
-                <CardUser key={uuid()} {...user} handleRemoveUser={handleRemoveUser} />
+              {users.reverse().map((user) => (
+                <CardUser key={uuid()} {...user} />
               ))}
             </ListUsers>
           }

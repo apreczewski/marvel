@@ -1,11 +1,11 @@
 import React from 'react';
-import { FaUser, FaPlusCircle, FaTimes } from 'react-icons/fa';
+import { useUsers, UserProps } from '../../../hooks/users';
 
+import { FaUser, FaPlusCircle, FaTimes } from 'react-icons/fa';
 import { Wrapper, Image, Content, Name, AddUser, Close } from './styles';
 
-import { CardUserData } from '../index'
-
-const Header: React.FC<CardUserData> = ({ id = '', name, email, values, handleRemoveUser }) => {
+const Header: React.FC<UserProps> = ({ id = '', name, email, values }) => {
+  const { removeUser } = useUsers();
 
   return (
     <Wrapper>
@@ -19,7 +19,7 @@ const Header: React.FC<CardUserData> = ({ id = '', name, email, values, handleRe
           {email ? <span>{email}</span> : <span>Add User</span>}
         </AddUser>
       </Content>
-      <Close onClick={() => handleRemoveUser(id)}>
+      <Close onClick={() => removeUser(id)}>
         <FaTimes size={10} />
       </Close>
     </Wrapper>

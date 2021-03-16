@@ -1,17 +1,14 @@
 import React from 'react';
+
 import { FaCog, FaTimes } from 'react-icons/fa';
-import { formatCurrency } from '../../utils/format';
+// import { formatCurrency } from '../../utils/format';
+
+import { useValues, ValueProps } from '../../hooks/values';
 
 import { Wrapper, Info, AnchorValue, Description, Value, Close } from './styles';
 
-interface TagValueData {
-  id: string,
-  value?: string,
-  description?: string,
-  handleRemoveValue(id: string): void,
-}
-
-const TagValue: React.FC<TagValueData> = ({ id, value, description, handleRemoveValue }) => {
+const TagValue: React.FC<ValueProps> = ({ id, value, description }) => {
+  const { removeValue } = useValues();
 
   return (
     <Wrapper>
@@ -23,7 +20,7 @@ const TagValue: React.FC<TagValueData> = ({ id, value, description, handleRemove
         {/* <Value>{`R$ ${formatCurrency({value, currencyValue: 'BRL', code: 'pt-BR'})}`}</Value> */}
         <Value>{`R$ ${value}`}</Value>
       </AnchorValue>
-      <Close onClick={() => handleRemoveValue(id)}>
+      <Close onClick={() => removeValue(id)}>
         <FaTimes size={12} />
       </Close>
     </Wrapper>

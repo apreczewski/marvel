@@ -34,8 +34,8 @@ const SignIn: React.FC = () => {
       const { email, password } = data;
 
       const shema = Yup.object().shape({
-        email: Yup.string().required('E-mail obrigatório').email('Digite um e-mial válido'),
-        password: Yup.string().required('Senha obrigatório'),
+        email: Yup.string().required(t('email requered')).email(t('please enter a valid email address')),
+        password: Yup.string().required(t('password requered')),
       });
 
       await shema.validate(data, {
@@ -49,18 +49,19 @@ const SignIn: React.FC = () => {
 
       history.push('/dashboard');
     } catch (error) {
-      console.log('errorrr ')
+
       if (error instanceof Yup.ValidationError) {
         const errors = getValidationError(error);
         formRef.current?.setErrors(errors);
       }
+
       addToast({
         type: 'error',
-        title: 'Error on autentication',
-        description: 'There was an error signing in, check your credentials'
+        title: t('error on autentication'),
+        description: t('there was an error signing in, check your credentials')
       })
     }
-  }, [signIn, addToast, history]);
+  }, [t, signIn, addToast, history]);
 
   return (
     <Container>
@@ -71,17 +72,21 @@ const SignIn: React.FC = () => {
             {/* <img src={logo} alt="logo" /> */}
 
             <Form ref={formRef} onSubmit={handleSubmit}>
-              <h1>{t('Faça seu login')}</h1>
+              <h1>{t('login in')}</h1>
 
-              <Input name="email" icon={FiMail} type="text" placeholder="E-mail" />
-              <Input name="password" icon={FiLock} type="password" placeholder="Senha" />
-              <Button type="submit">{t('Entrar')}</Button>
+              <Input name="email" icon={FiMail} type="text" placeholder={t('email')} />
+              <Input name="password" icon={FiLock} type="password" placeholder={t('password')} />
+              <Button type="submit">{t('enter')}</Button>
 
-              <a href="forgot">{t('Esqueci minha senha')}</a>
+              <a href="forgot">{t('i forgot my password')}</a>
             </Form>
             <Link to="/signup">
               <FiLogIn />
-              <span>{t('Criar Conta')}</span>
+              <span>{t('create an account')}</span>
+            </Link>
+            <Link to="/home">
+              <FiLogIn />
+              <span>{t('Go Home')}</span>
             </Link>
           </AnimationContainer>
         )}

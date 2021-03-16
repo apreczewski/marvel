@@ -1,26 +1,25 @@
 import React, { useState, useCallback, useEffect } from 'react';
 
-import { FaPlus } from 'react-icons/fa';
 import { Wrapper, AddValue } from './styles';
-import { formatCurrency } from '../../../utils/format';
-import { sumArray } from '../../../utils/calc';
+// import { formatCurrency } from '../../../utils/format';
+// import { sumArray } from '../../../utils/calc';
 
-import { CardUserData } from '../index'
+import { UserProps } from '../../../hooks/users'
 
-const Footer: React.FC<CardUserData> = ({ values, handleAddValue }) => {
+const Footer: React.FC<UserProps> = ({ values }) => {
   const [value, setValue] = useState("");
-  const [total, setTotal] = useState('');
+
 
   const handleOnChange = useCallback((event) => setValue(event.target.value), []);
 
   const handleSumValues = useCallback(() => {
     // setTotal(sumArray(values));
-    console.log('test');
-  }, [values])
+    // console.log('test');
+  }, [])
 
   const handleSumbitValue = useCallback((event) => {
-    console.log('event >> ', event.target.value)
-    console.log('value >> ', value)
+    // console.log('event >> ', event.target.value)
+    // console.log('value >> ', value)
     event.preventDefault();
     // handleAddValue(value, user);
     setValue("");
