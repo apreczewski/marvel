@@ -1,29 +1,34 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 
-import { Wrapper, AddValue } from './styles';
+import { useTranslation } from 'react-i18next';
+import { FormHandles } from '@unform/core';
+import { Form } from '@unform/web';
 // import { formatCurrency } from '../../../utils/format';
-// import { sumArray } from '../../../utils/calc';
+import Input from '../../../components/Input';
 
-import { UserProps } from '../../../hooks/users'
+import { UserProps, useHome } from '../../../hooks/home'
+import { Wrapper, AddAllValoes } from './styles';
+import { uuid } from 'uuidv4';
 
-const Footer: React.FC<UserProps> = ({ values }) => {
-  const [value, setValue] = useState("");
+const Footer: React.FC<UserProps> = ({ id }) => {
+  const formRef = useRef<FormHandles>(null);
+  const { addValueToUser, addValue } = useHome();
 
-
-  const handleOnChange = useCallback((event) => setValue(event.target.value), []);
+  const { t } = useTranslation();
 
   const handleSumValues = useCallback(() => {
-    // setTotal(sumArray(values));
-    // console.log('test');
-  }, [])
 
-  const handleSumbitValue = useCallback((event) => {
-    // console.log('event >> ', event.target.value)
-    // console.log('value >> ', value)
-    event.preventDefault();
-    // handleAddValue(value, user);
-    setValue("");
-  }, [])
+  }, []);
+
+  const handleSumbitValue = useCallback(({value}) => {
+    if (!!value) {
+      const valueCurrent = { id: uuid(), value };
+
+      addValueToUser(id, valueCurrent);
+      addValue(valueCurrent);
+      formRef.current?.clearField('value');
+    }
+  }, [addValueToUser])
 
   useEffect(() => {
     handleSumValues()
@@ -31,15 +36,12 @@ const Footer: React.FC<UserProps> = ({ values }) => {
 
   return (
     <Wrapper>
-      <form onSubmit={handleSumbitValue}>
-        <AddValue
-          type="text"
-          value={value}
-          onChange={handleOnChange}
-          placeholder="add value"
-        // name="addValue"
-        />
-      </form>
+      <Form onSubmit={handleSumbitValue}>
+        <Input name='value' placeholder={t("add value")} />
+      </Form>
+      <AddAllValoes >
+        Add All
+      </AddAllValoes>
       {/* <span>{`R$ ${formatCurrency(total, 'BRL', 'pt-BR')}`}</span> */}
     </Wrapper>
   );

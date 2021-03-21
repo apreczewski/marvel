@@ -1,7 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { uuid } from 'uuidv4';
-import { useValues } from '../../hooks/values';
-import { useUsers } from '../../hooks/users';
+import { useHome } from '../../hooks/home';
 
 import { useTranslation } from 'react-i18next';
 // import { formatNumber } from '../../utils/format';
@@ -24,18 +23,23 @@ import CardUser from '../../components/CardUser';
 const Home: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const [isExpandHeader, setIsExpandHeader] = useState(false);
-  const { values, addValue } = useValues();
-  const { users, addUser } = useUsers();
+  const { values, addValue, users, addUser, addValueAllUsers } = useHome();
 
   const { t } = useTranslation();
 
   const handleAddNewValue = useCallback(({ value }) => {
-    console.log('value >> ', value);
+    const id = uuid();
 
     if (!!value) {
-      addValue({ id: uuid(), value });
+      addValue({ id, value });
       formRef.current?.clearField('value');
     }
+
+    if(!!users){
+      const valueDivided = parseFloat(value)/users.length;
+      addValueAllUsers({ id, value: valueDivided.toString() });
+    }
+
   }, [addValue]);
 
   const handleAddNewUser = useCallback(() => {
@@ -62,12 +66,11 @@ const Home: React.FC = () => {
           {values &&
             <ListTags>
               <FirstItem />
-              {values.reverse().map((itemValue) => (
-                <TagValue key={uuid()} {...itemValue} />
+              {values.map((valueCurrent) => (
+                <TagValue key={uuid()} valueCurrent={valueCurrent}  />
               ))}
             </ListTags>
           }
-        </Header>
         <Division>
           <BtnHide onClick={() => handleExpandHeader(!isExpandHeader)}>
             {!isExpandHeader && <FaAngleDoubleDown size={10} />}
@@ -75,12 +78,14 @@ const Home: React.FC = () => {
             {/* <TotalValues>{`R$ ${formatCurrency(sumValues.toString(), 'BRL', 'pt-BR')}`}</TotalValues> */}
           </BtnHide>
         </Division>
+        </Header>
         <Body isExpandHeader={isExpandHeader}>
-          {users &&
+          {!!users &&
             <ListUsers isExpandHeader={isExpandHeader}>
-              {users.reverse().map((user) => (
-                <CardUser key={uuid()} {...user} />
-              ))}
+              {users.map((user) => {
+                return  <CardUser key={uuid()} {...user} />
+              }
+              )}
             </ListUsers>
           }
           <BtnAddUser onClick={handleAddNewUser}>

@@ -1,11 +1,12 @@
 import React from 'react';
-import { useUsers, UserProps } from '../../../hooks/users';
+import { useHome, UserProps } from '../../../hooks/home';
 
 import { FaUser, FaPlusCircle, FaTimes } from 'react-icons/fa';
 import { Wrapper, Image, Content, Name, AddUser, Close } from './styles';
 
-const Header: React.FC<UserProps> = ({ id = '', name, email, values }) => {
-  const { removeUser } = useUsers();
+const Header: React.FC<UserProps> = (user) => {
+  const { id, name, email } = user;
+  const { removeUser } = useHome();
 
   return (
     <Wrapper>

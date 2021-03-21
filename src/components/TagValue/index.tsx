@@ -3,15 +3,22 @@ import React from 'react';
 import { FaCog, FaTimes } from 'react-icons/fa';
 // import { formatCurrency } from '../../utils/format';
 
-import { useValues, ValueProps } from '../../hooks/values';
+import { useHome, ValueProps } from '../../hooks/home';
 
 import { Wrapper, Info, AnchorValue, Description, Value, Close } from './styles';
 
-const TagValue: React.FC<ValueProps> = ({ id, value, description }) => {
-  const { removeValue } = useValues();
+interface TagProps {
+  valueCurrent: ValueProps,
+  width?: string,
+  height?: string,
+}
+
+const TagValue: React.FC<TagProps> = ({ valueCurrent, width, height  }) => {
+  const { id, value, description } = valueCurrent;
+  const { removeValue } = useHome();
 
   return (
-    <Wrapper>
+    <Wrapper width={width} height={height}>
       <Info>
         <FaCog size={12} />
       </Info>

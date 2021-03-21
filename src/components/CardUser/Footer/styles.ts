@@ -36,3 +36,7 @@ export const AddValue = styled.input`
   text-align: center;
   color: #7a7a7a;
 `;
+
+export const AddAllValoes = styled.button`
+  background: lightskyblue;
+`;

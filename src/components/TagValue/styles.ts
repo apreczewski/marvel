@@ -7,8 +7,8 @@ interface WrapperProps {
 }
 
 export const Wrapper = styled.div<WrapperProps>`
-  width: 130px;
-  height: 35px;
+  width: ${p => !!p.width ? p.width : '130px'};
+  height: ${p => !!p.height ? p.height : '35px'};
   background: #EDFAA3;
   border-radius: 25px;
   display: flex;

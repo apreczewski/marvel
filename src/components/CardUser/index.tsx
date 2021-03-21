@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserProps } from '../../hooks/users';
+import { UserProps } from '../../hooks/home';
 
 import Header from './Header'
 import Body from './Body'
@@ -7,13 +7,14 @@ import Footer from './Footer'
 
 import { Wrapper } from './styles';
 
-const CardUser: React.FC<UserProps> = ({ ...rest }) => {
+const CardUser: React.FC<UserProps> = (user) => {
+
 
   return (
     <Wrapper>
-      <Header {...rest} />
-      <Body {...rest} />
-      <Footer {...rest} />
+      <Header {...user} />
+      <Body {...user} />
+      <Footer {...user} />
     </Wrapper>
   );
 }

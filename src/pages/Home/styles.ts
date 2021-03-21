@@ -2,33 +2,32 @@ import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
   position: relative;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
 
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
 `;
 
 export const Background = styled.div`
+  position: absolute;
+  top: 0;
   background: #1e1e1e;
   height: 16rem;
   width: 100%;
 `;
 
 export const Container = styled.div`
-  position: absolute;
   height: 28rem;
   width: 60.1rem;
-  top: 5rem;
   border-radius: 9px;
   background: #f9fcfe;
   box-shadow: -16px -16px 82px rgba(255, 255, 255, 0.15),
     26px 26px 82px rgba(20, 43, 88, 0.1);
 
-  @media (max-width: 1200px) {
-    height: 50rem;
+  @media (max-width: 1100px) {
+    margin: 0 2rem;
   }
 `;
 
@@ -112,7 +111,6 @@ export const BtnAddUser = styled.button`
   height: 70px;
   width: 70px;
 
-  /* backgr ound: #FFFFFF; */
   -webkit-appearance: none;
   box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.5),
     10px 10px 15px rgba(70, 70, 70, 0.12);
@@ -153,6 +151,11 @@ export const BtnAddUser = styled.button`
     font-weight: bold;
     font-size: 12px;
     color: rgba(0, 26, 255, 0.7);
+  }
+
+  @media (max-width: 1100px) {
+    bottom: 5px;
+    right: 5px;
   }
 `;
 
