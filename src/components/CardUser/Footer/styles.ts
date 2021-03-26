@@ -11,32 +11,22 @@ export const Wrapper = styled.div`
   border-top: 1px solid #EEF2F5;
 
   span {
-    /* font-weight: bold; */
     color: #7a7a7a;
-    /* margin-right: 15px; */
     font-size: 12px;
   }
-`;
 
-export const AddValue = styled.input`
-  position: absolute;
-  top: -12px;
-  left: 50px;
-  height: 25px;
-  width: 130px;
-  padding: 5px 15px;
-  border: 1px solid #ececec;
-  border-radius: 25px;
-  background: #ffffff;
-  font-size: 10px;
-
-
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color: #7a7a7a;
 `;
 
 export const AddAllValoes = styled.button`
-  background: lightskyblue;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+
+  font-size: 12px;
+  text-decoration: none;
+  border: none;
+  background: #716B65;
+
+  border-radius: 50px;
+  padding: 5px;
 `;

@@ -23,24 +23,26 @@ import CardUser from '../../components/CardUser';
 const Home: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const [isExpandHeader, setIsExpandHeader] = useState(false);
-  const { values, addValue, users, addUser, addValueAllUsers } = useHome();
+  const { values, addValue, users, addUser, addValueAllUsers, removeValueFromValues } = useHome();
 
   const { t } = useTranslation();
 
   const handleAddNewValue = useCallback(({ value }) => {
     const id = uuid();
 
-    if (!!value) {
-      addValue({ id, value });
-      formRef.current?.clearField('value');
-    }
-
     if(!!users){
       const valueDivided = parseFloat(value)/users.length;
       addValueAllUsers({ id, value: valueDivided.toString() });
     }
 
-  }, [addValue]);
+    const usersCurrent = users?.map(user => user.id);
+
+    if (!!value) {
+      addValue({ id, value, usersIds: usersCurrent, description: '', dividedValue: '' });
+      formRef.current?.clearField('value');
+    }
+
+  }, [addValue, addValueAllUsers, users]);
 
   const handleAddNewUser = useCallback(() => {
     addUser({ id: uuid() });
@@ -67,7 +69,7 @@ const Home: React.FC = () => {
             <ListTags>
               <FirstItem />
               {values.map((valueCurrent) => (
-                <TagValue key={uuid()} valueCurrent={valueCurrent}  />
+                <TagValue key={uuid()} valueCurrent={valueCurrent} handleRemove={() => removeValueFromValues(valueCurrent.id)} />
               ))}
             </ListTags>
           }

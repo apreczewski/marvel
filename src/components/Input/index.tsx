@@ -17,6 +17,8 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: React.ComponentType<IconBaseProps>;
   iconAlert?: React.ComponentType<IconBaseProps>;
   iconEye?: React.ComponentType<IconBaseProps>;
+  height?: string;
+  width?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -25,6 +27,8 @@ const Input: React.FC<InputProps> = ({
   icon: Icon,
   iconAlert: IconAlert,
   iconEye: IconEye,
+  height = '',
+  width = '',
   ...rest
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -55,6 +59,8 @@ const Input: React.FC<InputProps> = ({
       isFocused={isFocused}
       isFilled={isFilled}
       isErrored={!!error}
+      height={height}
+      width={width}
     >
       {Icon && <Icon size={20} />}
       <input

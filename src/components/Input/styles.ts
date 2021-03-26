@@ -7,6 +7,8 @@ interface ContainerProps {
   isFocused: boolean;
   isFilled: boolean;
   isErrored: boolean;
+  height: string,
+  width: string,
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -51,8 +53,8 @@ export const Container = styled.div<ContainerProps>`
     flex: 1;
     background: transparent;
     border: 0;
-    width: 130px;
-    height: 35px;
+    width: ${ p => !!p.width ? p.width : '130px'};
+    height: ${ p => !!p.height ? p.height : '35px'};
     padding: 10px 15px;
     color: ${colors.charcoalGreyTwo};
     font-size: 12px;

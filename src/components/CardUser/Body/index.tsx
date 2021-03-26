@@ -6,11 +6,8 @@ import TagValue from '../../TagValue';
 import { Wrapper } from './styles';
 
 const Body: React.FC<UserProps> = ({ id }) => {
-  const { users } = useHome();
-
+  const { users, removeValueFromUser } = useHome();
   const user = users?.find((user: UserProps)  => user.id === id);
-
-
 
   return (
     <Wrapper>
@@ -22,6 +19,7 @@ const Body: React.FC<UserProps> = ({ id }) => {
             valueCurrent={valueCurrent}
             width='105px'
             height='25px'
+            handleRemove={() => removeValueFromUser(valueCurrent.id, user.id)}
           />;
       })}
     </Wrapper>
