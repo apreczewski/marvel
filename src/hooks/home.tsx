@@ -100,64 +100,13 @@ export const HomeProvider: React.FC = ({ children }) => {
     }
   }, [values]);
 
-  const removeValueFromUser = useCallback((valueId: string, userId: string) => {
-
-    // console.log('valueId >> userId >> ', valueId, userId);
-
-    const newUsers = users.map(user => {
-
-      if(user.id === userId){
-        const { values: valuesCurrent } = user;
-
-        //remove the userId from list values
-        let dividedValue = '';
-
-        const newListValues = values.map(value => {
-
-          if(value.id === valueId){
-            const { usersIds } = value;
-
-            const newUsersIds = usersIds?.filter(id => id !== userId);
-
-            if(newUsersIds !== undefined){
-              dividedValue = (parseFloat(value.value)/newUsersIds?.length).toString()
-              return {
-                ...value,
-                dividedValue,
-                usersIds: newUsersIds
-              };
-            }
-          }
-
-          return value;
-        })
-
-        console.log('newListValues >> ', newListValues)
-        setValues(newListValues);
-
-        //remove value of user
-        const newValuesCurrent = valuesCurrent?.filter(value => value.id !== valueId)
-
-
-        return {...user, values: newValuesCurrent};
-      }
-
-
-      //update values
-
-      return user;
-    })
-
-    // console.log('newUsers >> ', newUsers);
-    setUsers(newUsers);
-  }, [users, values]);
 
   const removeValueFromValues = useCallback((valueId: string) => {
     if (!!valueId) {
 
       const newValues = values.filter(value => {
         if(value.id === valueId ){
-          const { usersIds,  } = value;
+          const { usersIds } = value;
 
           const newUsers = users.map(user => {
             if(usersIds?.includes(user.id)){
@@ -180,6 +129,93 @@ export const HomeProvider: React.FC = ({ children }) => {
       setValues(newValues);
     }
   }, [values, users]);
+
+  const removeValueFromUser = useCallback((valueId: string, userId: string) => {
+
+    //remove value all users
+    const newUsers = users.map(user => {
+
+      //remove the userId from list values
+      if(user.id === userId){
+        const { values: valuesCurrent } = user;
+
+        const newValuesCurrent = valuesCurrent?.filter(value => value.id !== valueId);
+
+        return {...user, values: newValuesCurrent};
+      }
+
+      return user;
+    })
+    // console.log('newUsers >> ', newUsers);
+    setUsers(newUsers);
+
+    //check if last userId
+    const checkUserId = values.filter(value => value.id === valueId);
+    const { usersIds } = checkUserId[0]
+
+    if(usersIds?.length === 1){
+      removeValueFromValues(valueId)
+      return;
+    }
+
+
+    // remove userId of value
+    const newListValues = values.map(value => {
+      if(value.id === valueId){
+        const { usersIds } = value;
+
+        // if(usersIds?.length === 1 ){
+        //   return undefined;
+        // }
+
+        const newUsersIds = usersIds?.filter(id => id !== userId);
+
+        if(newUsersIds !== undefined){
+          let dividedValue = (parseFloat(value.value)/newUsersIds?.length).toString();
+
+          return {
+            ...value,
+            dividedValue,
+            usersIds: newUsersIds
+          };
+        }
+      }
+
+      return value;
+    }).filter(value => value !== undefined);
+
+    // if(!!newListValues){
+    setValues(newListValues);
+
+    // }
+
+    // recalc value and set new value on users
+    const valueRecalc = newListValues.filter(value => value.id === valueId)
+
+    const newUserNewValue = newUsers.map(user => {
+      if(user.id !== userId){
+        const { values } = user;
+        const { dividedValue } = valueRecalc[0];
+
+        const newValues = values?.map(value => {
+          if(valueId === value.id && dividedValue !== undefined){
+            return {...value, value: dividedValue}
+          }
+          return value;
+        });
+
+        return {...user, values: newValues}
+      }
+
+      return user;
+    })
+    console.log('newUserNewValue >> ', newUserNewValue);
+
+
+    setUsers(newUserNewValue);
+
+  }, [users, values, removeValueFromValues]);
+
 
   return (
     <HomeContext.Provider value={{

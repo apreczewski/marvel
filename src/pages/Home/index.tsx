@@ -14,7 +14,7 @@ import TagValue from '../../components/TagValue';
 
 import {
   Wrapper, Container, Background, Header, ListTags, FirstItem,
-  Division, BtnHide, Body, BtnAddUser,
+  Division, BtnHide, Body, BtnAddUser, TotalValues,
   ListUsers
 } from './styles';
 import Input from '../../components/Input';
@@ -29,16 +29,17 @@ const Home: React.FC = () => {
 
   const handleAddNewValue = useCallback(({ value }) => {
     const id = uuid();
+    let dividedValue = '';
 
     if(!!users){
-      const valueDivided = parseFloat(value)/users.length;
-      addValueAllUsers({ id, value: valueDivided.toString() });
+      dividedValue = (parseFloat(value)/users.length).toString();
+      addValueAllUsers({ id, value: dividedValue });
     }
 
     const usersCurrent = users?.map(user => user.id);
 
     if (!!value) {
-      addValue({ id, value, usersIds: usersCurrent, description: '', dividedValue: '' });
+      addValue({ id, value, usersIds: usersCurrent, description: '', dividedValue });
       formRef.current?.clearField('value');
     }
 
@@ -57,6 +58,12 @@ const Home: React.FC = () => {
     return;
   }, [])
 
+  const getValueTotal = useCallback(()=>{
+    let sum = 0;
+    values?.forEach(value => sum += parseFloat(value.value))
+    return sum;
+  },[values])
+
   return (
     <Wrapper>
       <Background />
@@ -73,14 +80,15 @@ const Home: React.FC = () => {
               ))}
             </ListTags>
           }
+        </Header>
         <Division>
           <BtnHide onClick={() => handleExpandHeader(!isExpandHeader)}>
             {!isExpandHeader && <FaAngleDoubleDown size={10} />}
             {isExpandHeader && <FaAngleDoubleUp size={10} />}
-            {/* <TotalValues>{`R$ ${formatCurrency(sumValues.toString(), 'BRL', 'pt-BR')}`}</TotalValues> */}
           </BtnHide>
+          {/* <TotalValues>{`R$ ${formatCurrency(sumValues.toString(), 'BRL', 'pt-BR')}`}</TotalValues> */}
+          <TotalValues>{`R$ ${getValueTotal()} `}</TotalValues>
         </Division>
-        </Header>
         <Body isExpandHeader={isExpandHeader}>
           {!!users &&
             <ListUsers isExpandHeader={isExpandHeader}>

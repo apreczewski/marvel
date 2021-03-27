@@ -14,20 +14,25 @@ export const Background = styled.div`
   position: absolute;
   top: 0;
   background: #1e1e1e;
-  height: 16rem;
+  height: 25rem;
   width: 100%;
+
+  @media (max-height: 600px) {
+    height: 15rem;
+  }
 `;
 
 export const Container = styled.div`
-  height: 28rem;
+  height: 45rem;
   width: 60.1rem;
   border-radius: 9px;
-  background: #f9fcfe;
+  /* background: #F9FCFE; */
   box-shadow: -16px -16px 82px rgba(255, 255, 255, 0.15),
     26px 26px 82px rgba(20, 43, 88, 0.1);
 
-  @media (max-width: 1100px) {
+  @media (max-height: 600px) {
     margin: 0 2rem;
+    height: 30rem;
   }
 `;
 
@@ -36,8 +41,8 @@ interface ExpandProps {
 }
 
 export const Header = styled.div<ExpandProps>`
-  height: ${p => (p.isExpandHeader ? '125px' : '60px')};
-  background: #a1b0a8;
+  height: ${p => (p.isExpandHeader ? '165px' : '85px')};
+  background: #F4F8FA;
   border-top-left-radius: 9px;
   border-top-right-radius: 9px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
@@ -196,9 +201,12 @@ export const BtnBase = styled.button`
 `;
 
 export const Division = styled.div`
+  position: relative;
+  /* bottom: -15px; */
   width: 100%;
-  height: 15px;
+  height: 25px;
   background: #ffffff;
+
 
   display: flex;
   justify-content: center;
@@ -206,12 +214,16 @@ export const Division = styled.div`
 `;
 
 export const BtnHide = styled(BtnBase)`
-  width: 50px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  margin-right: 9px;
 `;
 
 export const TotalValues = styled.div`
   color: #7a7a7a;
   font-weight: bold;
+  font-size: 10px;
 `;
 
 
@@ -219,13 +231,13 @@ export const Body = styled.div<ExpandProps>`
   position: relative;
   width: 100%;
   ${p => (p.isExpandHeader ? css`
-    height: calc(100% - 125px);
+    height: calc(100% - 180px);
   ` : css`
-    height: calc(100% - 60px);
+    height: calc(100% - 100px);
   `
   )}
 
-  background: #ececec;
+  background: #F9FCFE;
   border-bottom-left-radius: 9px;
   border-bottom-right-radius: 9px;
   padding: 0 0 5px 5px;

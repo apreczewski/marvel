@@ -7,14 +7,15 @@ interface ContainerProps {
   isFocused: boolean;
   isFilled: boolean;
   isErrored: boolean;
-  height: string,
-  width: string,
+  height?: string,
+  width?: string,
+  position?: string
 }
 
 export const Container = styled.div<ContainerProps>`
+  position: absolute;
   background: #ffffff;
   border-radius: 50px;
-  position: absolute;
   top: 5px;
   left: 5px;
   font-style: normal;
@@ -45,7 +46,7 @@ export const Container = styled.div<ContainerProps>`
       color: ${colors.mediumPink};
     `}
 
-  :hover {
+  :hover{
     box-shadow: 2px 2px 8px rgba(35, 211, 199, 0.2);
   }
 
@@ -60,9 +61,11 @@ export const Container = styled.div<ContainerProps>`
     font-size: 12px;
     text-align: center;
 
-    &::placeholder {
-      color: ${colors.charcoalGreyTwo};
+    &::placeholder :active {
+      color: red;
     }
+
+
   }
 
   svg {

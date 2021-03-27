@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { scrollbarThin } from '../../../styles/scrollbar';
 export const Wrapper = styled.div`
+  position: relative;
   height: 275px;
   width: 230px;
   display: grid;
