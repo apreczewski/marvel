@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { scrollbarThin } from '../../styles/scrollbar';
 
 export const Wrapper = styled.div`
   position: relative;
@@ -93,22 +94,7 @@ export const ListTags = styled.div`
 
   grid-template-areas: "avalue avalue";
 
-  ::-webkit-scrollbar {
-    width: 9px;
-  }
-
-  ::-webkit-scrollbar-track {
-    border-radius: 25px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #7a7a7a;
-    border-radius: 25px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #7a7a7a;
-  }
+  ${scrollbarThin};
 `;
 
 export const BtnAddUser = styled.button`
@@ -261,26 +247,11 @@ export const ListUsers = styled.div<ExpandProps>`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(229px, auto));
-  grid-template-rows: repeat(auto-fill, minmax(250px, auto));
+  grid-template-rows: repeat(auto-fill, minmax(260px, auto));
   grid-gap: 9px;
   justify-content: flex-start;
   overflow: auto;
   padding: 5px 0;
 
-  ::-webkit-scrollbar {
-    width: 9px;
-  }
-
-  ::-webkit-scrollbar-track {
-    border-radius: 25px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #7a7a7a;
-    border-radius: 25px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #7a7a7a;
-  }
+  ${scrollbarThin};
 `;

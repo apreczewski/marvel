@@ -3,7 +3,7 @@ import { uuid } from 'uuidv4';
 import { useHome } from '../../hooks/home';
 
 import { useTranslation } from 'react-i18next';
-// import { formatNumber } from '../../utils/format';
+import { formatValue } from '../../utils/format';
 
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
@@ -31,7 +31,7 @@ const Home: React.FC = () => {
     const id = uuid();
     let dividedValue = '';
 
-    if(!!users){
+    if(!!users && !!value){
       dividedValue = (parseFloat(value)/users.length).toString();
       addValueAllUsers({ id, value: dividedValue });
     }
@@ -86,8 +86,7 @@ const Home: React.FC = () => {
             {!isExpandHeader && <FaAngleDoubleDown size={10} />}
             {isExpandHeader && <FaAngleDoubleUp size={10} />}
           </BtnHide>
-          {/* <TotalValues>{`R$ ${formatCurrency(sumValues.toString(), 'BRL', 'pt-BR')}`}</TotalValues> */}
-          <TotalValues>{`R$ ${getValueTotal()} `}</TotalValues>
+          <TotalValues>{formatValue({value: getValueTotal().toString()})}</TotalValues>
         </Division>
         <Body isExpandHeader={isExpandHeader}>
           {!!users &&

@@ -13,15 +13,14 @@ interface ContainerProps {
 }
 
 export const Container = styled.div<ContainerProps>`
-  position: absolute;
   background: #ffffff;
-  border-radius: 50px;
-  bottom: 5px;
-  left: 5px;
   font-style: normal;
 
   display: flex;
   align-items: center;
+
+  border-top: 1px solid #EEF2F5;
+  border-bottom: 1px solid #EEF2F5;
 
   & + div {
     margin-top: 10px;
@@ -30,14 +29,14 @@ export const Container = styled.div<ContainerProps>`
   ${props =>
     props.isErrored &&
     css`
-      border-color:  #15a38a;
+      border-color: rgb(21,163,138, 0.95);
     `}
 
   ${props =>
     props.isFocused &&
     css`
       color: ${colors.mediumPink};
-      border-color: ${colors.greenyBlue};
+      border-color: rgb(21,163,138, 0.3);
     `}
 
   ${props =>
@@ -46,9 +45,6 @@ export const Container = styled.div<ContainerProps>`
       color: ${colors.mediumPink};
     `}
 
-  :hover{
-    box-shadow: 2px 2px 8px rgba(35, 211, 199, 0.2);
-  }
 
   input {
     flex: 1;
@@ -60,16 +56,6 @@ export const Container = styled.div<ContainerProps>`
     color: ${colors.charcoalGreyTwo};
     font-size: 12px;
     text-align: center;
-
-    &::placeholder :active {
-      color: red;
-    }
-
-
-  }
-
-  svg {
-    margin-right: 16px;
   }
 `;
 

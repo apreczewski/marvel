@@ -1,26 +1,18 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback } from 'react';
 
-import { useTranslation } from 'react-i18next';
-import { FormHandles } from '@unform/core';
-import { Form } from '@unform/web';
-import Input from '../../../components/Input';
-// import { formatCurrency } from '../../../utils/format';
+import { formatValue } from '../../../utils/format';
+import { UserProps,  } from '../../../hooks/home'
 
-
-import { UserProps, useHome } from '../../../hooks/home'
 import { Wrapper } from './styles';
-import { uuid } from 'uuidv4';
+
 
 const Footer: React.FC<UserProps> = ({ values }) => {
-
 
   const getValueTotal = useCallback(()=>{
     let sum = 0;
     values?.forEach(value => sum += parseFloat(value.value))
     return sum;
   },[values])
-
-
 
   return (
     <Wrapper>
@@ -31,7 +23,8 @@ const Footer: React.FC<UserProps> = ({ values }) => {
         {t('All')}
       </AddAllValoes> */}
       {/* <span>{`R$ ${formatCurrency(total, 'BRL', 'pt-BR')}`}</span> */}
-      <span>{`R$ ${getValueTotal()}`}</span>
+
+      <span>{formatValue({value: getValueTotal().toString()})}</span>
     </Wrapper>
   );
 }

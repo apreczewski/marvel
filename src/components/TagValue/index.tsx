@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { FaCog, FaTimes } from 'react-icons/fa';
-// import { formatCurrency } from '../../utils/format';
+import { formatValue } from '../../utils/format';
 
 import { ValueProps } from '../../hooks/home';
 
@@ -11,21 +11,21 @@ interface TagProps {
   valueCurrent: ValueProps,
   width?: string,
   height?: string,
+  padding?: string,
   handleRemove(): void
 }
 
-const TagValue: React.FC<TagProps> = ({ valueCurrent, width, height, handleRemove  }) => {
+const TagValue: React.FC<TagProps> = ({ valueCurrent, width, height, padding, handleRemove  }) => {
   const { value, description } = valueCurrent;
 
   return (
-    <Wrapper width={width} height={height}>
+    <Wrapper width={width} height={height} padding={padding}>
       <Info>
         <FaCog size={12} />
       </Info>
       <AnchorValue>
         <Description>{description}</Description>
-        {/* <Value>{`R$ ${formatCurrency({value, currencyValue: 'BRL', code: 'pt-BR'})}`}</Value> */}
-        <Value>{`R$ ${value}`}</Value>
+        <Value>{formatValue({value})}</Value>
       </AnchorValue>
       <Close onClick={handleRemove}>
         <FaTimes size={12} />

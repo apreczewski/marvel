@@ -6,7 +6,7 @@ import TagValue from '../../TagValue';
 import { Form } from '@unform/web';
 import Input from '../../../components/inputs/InputtoCard';
 
-import { Wrapper } from './styles';
+import { Wrapper, TagList } from './styles';
 import { useTranslation } from 'react-i18next';
 
 const Body: React.FC<UserProps> = ({ id }) => {
@@ -15,8 +15,6 @@ const Body: React.FC<UserProps> = ({ id }) => {
   const user = users?.find((user: UserProps)  => user.id === id);
 
   const { t } = useTranslation();
-
-
 
   const handleAddNewValue = useCallback(({value}) => {
     if (!!value) {
@@ -32,18 +30,20 @@ const Body: React.FC<UserProps> = ({ id }) => {
 
   return (
     <Wrapper>
-      {user?.values && user.values.map((valueCurrent: ValueProps) => {
-          // console.log('valueCurrent >> ', valueCurrent);
-
+      <TagList>
+        {user?.values && user.values.map((valueCurrent: ValueProps) => {
           return <TagValue
-            key={uuid()}
-            valueCurrent={valueCurrent}
-            width='105px'
-            height='25px'
-            handleRemove={() => removeValueFromUser(valueCurrent.id, user.id)}
+          key={uuid()}
+          valueCurrent={valueCurrent}
+          width='102px'
+          height='35px'
+          padding='5px'
+          handleRemove={() => removeValueFromUser(valueCurrent.id, user.id)}
+
           />;
-      })}
-       <Form onSubmit={handleAddNewValue}>
+        })}
+      </TagList>
+      <Form onSubmit={handleAddNewValue}>
         <Input name='value' placeholder={t("add value")} height="25px" width="100%" />
       </Form>
     </Wrapper>

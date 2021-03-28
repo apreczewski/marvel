@@ -8,7 +8,6 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0 5px;
-  border-top: 1px solid #EEF2F5;
 
   span {
     color: #7a7a7a;

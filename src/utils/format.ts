@@ -2,54 +2,55 @@
 export const formatNumber = ( value: string): number =>
   parseInt(value.replace(/\D/g, '.'));
 
-interface ValueCurrentData {
+interface FormatValueData {
   value: string;
-  currencyValue: string;
-  code: string;
+  currency?: string;
+  code?: string;
 }
 
-export const formatCurrency = ({
+export const formatValue = ({
   value,
-  currencyValue,
-  code,
-}: ValueCurrentData): string => {
-  const valueFormatted = formatNumber(value);
+  currency = 'BRL',
+  code = 'pt-BR',
+}: FormatValueData): string => {
+
   return new Intl.NumberFormat(code, {
-    currency: currencyValue,
+    style: 'currency',
+    currency: currency,
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
-  }).format(parseFloat(valueFormatted.toString()));
+  }).format(parseFloat(value));
 };
 
 interface CalcData {
   amount: string;
   price: string;
   code: string;
-  currencyValue: string;
+  currency: string;
 }
 
 export const handleMultiplication = ({
   amount,
   price,
-  currencyValue,
+  currency,
   code,
 }: CalcData): string => {
   const result = parseFloat(amount) * parseFloat(price);
   if (result.toString() === 'NaN') {
-    return formatCurrency({ value: '0', currencyValue, code });
+    return formatValue({ value: '0', currency, code });
   }
-  return formatCurrency({ value: result.toString(), currencyValue, code });
+  return formatValue({ value: result.toString(), currency, code });
 };
 
 export const handleDivision = ({
   amount,
   price,
-  currencyValue,
+  currency,
   code,
 }: CalcData): string => {
   const result = parseFloat(amount) / parseFloat(price);
   if (result.toString() === 'NaN') {
-    return formatCurrency({ value: '0', currencyValue, code });
+    return formatValue({ value: '0', currency, code });
   }
-  return formatCurrency({ value: result.toString(), currencyValue, code });
+  return formatValue({ value: result.toString(), currency, code });
 };
