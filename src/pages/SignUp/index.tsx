@@ -2,7 +2,7 @@ import React, { useCallback, useRef } from 'react';
 import { FiMail, FiLock, FiUser, FiArrowLeft } from 'react-icons/fi'
 import { useTranslation } from 'react-i18next';
 
-import Input from '../../components/inputs/Input';
+import Input from '../../components/inputs/InputValue';
 import Button from '../../components/buttons/Default';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';

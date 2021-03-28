@@ -9,21 +9,25 @@ import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 
 
-import { FaAngleDoubleDown, FaAngleDoubleUp, FaPlus } from 'react-icons/fa'
+import { FaAngleDoubleDown, FaAngleDoubleUp } from 'react-icons/fa'
+import { ImUserPlus, ImUser } from 'react-icons/im'
 import TagValue from '../../components/TagValue';
 
 import {
-  Wrapper, Container, Background, Header, ListTags, FirstItem,
+  Wrapper, Container, Header, SubHeaderLeft, SubHeaderRight, Profile, Background, AnchorListTags, ListTags,
   Division, BtnHide, Body, BtnAddUser, TotalValues,
   ListUsers
 } from './styles';
-import Input from '../../components/Input';
+import Input from '../../components/inputs/InputToValue';
 import CardUser from '../../components/CardUser';
 
 const Home: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const [isExpandHeader, setIsExpandHeader] = useState(false);
   const { values, addValue, users, addUser, addValueAllUsers, removeValueFromValues } = useHome();
+  const [auth,
+    // setAuth
+  ] = useState(false);
 
   const { t } = useTranslation();
 
@@ -68,25 +72,37 @@ const Home: React.FC = () => {
     <Wrapper>
       <Background />
       <Container>
-        <Header isExpandHeader={isExpandHeader}>
-          <Form ref={formRef} onSubmit={handleAddNewValue}>
-            <Input name="value" placeholder={t("add value")} />
-          </Form>
+        <Header>
+          <SubHeaderLeft>
+            <Form ref={formRef} onSubmit={handleAddNewValue}>
+              <Input name="value" placeholder={t("add value")} />
+            </Form>
+            <BtnAddUser onClick={handleAddNewUser}>
+              <ImUserPlus size={15} />
+            </BtnAddUser>
+            <TotalValues><span>{formatValue({value: getValueTotal().toString()})}</span></TotalValues>
+          </SubHeaderLeft>
+          <SubHeaderRight>
+            <Profile>
+              {!auth && <ImUser size={15} />}
+              {auth && <img src="https://media-exp1.licdn.com/dms/image/C4D03AQFKwwmfM08O4A/profile-displayphoto-shrink_200_200/0/1590517310562?e=1622678400&v=beta&t=gmp6bAnPSPkQmDSpmNMX1GkTTABTOKVlv56EIjoXFYA" alt="imageProfile"/>}
+            </Profile>
+          </SubHeaderRight>
+        </Header>
+        <AnchorListTags isExpandHeader={isExpandHeader}>
           {values &&
             <ListTags>
-              <FirstItem />
               {values.map((valueCurrent) => (
                 <TagValue key={uuid()} valueCurrent={valueCurrent} handleRemove={() => removeValueFromValues(valueCurrent.id)} />
               ))}
             </ListTags>
           }
-        </Header>
+        </AnchorListTags>
         <Division>
           <BtnHide onClick={() => handleExpandHeader(!isExpandHeader)}>
             {!isExpandHeader && <FaAngleDoubleDown size={10} />}
             {isExpandHeader && <FaAngleDoubleUp size={10} />}
           </BtnHide>
-          <TotalValues>{formatValue({value: getValueTotal().toString()})}</TotalValues>
         </Division>
         <Body isExpandHeader={isExpandHeader}>
           {!!users &&
@@ -97,19 +113,7 @@ const Home: React.FC = () => {
               )}
             </ListUsers>
           }
-          <BtnAddUser onClick={handleAddNewUser}>
-            <FaPlus size={15} />
-          </BtnAddUser>
         </Body>
-        {/* <AnchorHider>
-      <HideButtonFooter onClick={()=>handleExpandHeader(!isExpandHeader)}>
-        {isExpandHeader ? (
-          <FontAwesomeIcon icon={faAngleDoubleUp} />
-          ) : (
-            <FontAwesomeIcon icon={faAngleDoubleDown} />
-            )}
-      </HideButtonFooter>
-    </AnchorHider> */}
       </Container>
     </Wrapper>
   );

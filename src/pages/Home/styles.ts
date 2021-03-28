@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
+import { shade } from 'polished';
 import { scrollbarThin } from '../../styles/scrollbar';
+import colors from '../../styles/colors';
 
 export const Wrapper = styled.div`
   position: relative;
@@ -27,58 +29,141 @@ export const Container = styled.div`
   height: 45rem;
   width: 60.1rem;
   border-radius: 9px;
-  /* background: #F9FCFE; */
-  box-shadow: -16px -16px 82px rgba(255, 255, 255, 0.15),
-    26px 26px 82px rgba(20, 43, 88, 0.1);
 
   @media (max-height: 600px) {
     margin: 0 2rem;
-    height: 30rem;
+    height: 33rem;
   }
 `;
+
+export const Header = styled.div`
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 3px;
+  padding: 10px;
+  border-radius: 9px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  background: #F4F8FA;
+`;
+
+export const SubHeaderLeft = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const BtnAddUser = styled.button`
+  width: 130px;
+  height: 35px;
+  padding: 10px 15px;
+  margin: 0 10px;
+
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: none;
+  border-radius: 25px;
+  background: #e6e6e3;
+
+  cursor: pointer;
+
+  > svg {
+    color: #7a7a7a;
+  }
+
+
+  &:hover {
+    background: ${shade(0.10, '#e6e6e3')};
+
+    > svg {
+      color: #15a38a;
+    }
+  }
+
+  :active {
+    background: ${shade(0.15, '#e6e6e3')};
+
+    > svg {
+      color: #15a38a;
+    }
+  }
+`;
+
+export const TotalValues = styled.div`
+  width: 130px;
+  height: 35px;
+  padding: 10px 15px;
+
+  border-radius: 25px;
+  background: #e6e6e3;
+
+
+  color: #7a7a7a;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  > span {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+  }
+`;
+
+export const SubHeaderRight = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const Profile = styled.button`
+  border: none;
+  text-decoration: none;
+
+  width: 35px;
+  height: 35px;
+  background: ${colors.greenyBlue};
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  > svg {
+    width: 20px;
+    height: 20px;
+    color: #F4F8FA;
+  }
+
+  > img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+  }
+`
 
 interface ExpandProps {
   isExpandHeader: boolean;
 }
 
-export const Header = styled.div<ExpandProps>`
-  height: ${p => (p.isExpandHeader ? '165px' : '85px')};
+export const AnchorListTags = styled.div<ExpandProps>`
+  height: ${p => (p.isExpandHeader ? '167px' : '85px')};
   background: #F4F8FA;
   border-top-left-radius: 9px;
   border-top-right-radius: 9px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   position: relative;
-
   transition: height 0.8s ease-out;
-`;
-
-export const AddValue = styled.input`
-  grid-area: avalue;
-  width: 130px;
-  height: 35px;
-  padding: 10px 15px;
-  background: #ffffff;
-  border: 1px solid #eef3f7;
-  border-radius: 50px;
-  position: absolute;
-  top: 10px;
-  left: 10px;
-
-  font-style: normal;
-  font-weight: bold;
-  font-size: 11px;
-
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color: #7a7a7a;
-`;
-
-export const FirstItem = styled.div`
-  width: 130px;
-  height: 35px;
-  background: transparent;
-  border-radius: 25px;
 `;
 
 export const ListTags = styled.div`
@@ -95,59 +180,6 @@ export const ListTags = styled.div`
   grid-template-areas: "avalue avalue";
 
   ${scrollbarThin};
-`;
-
-export const BtnAddUser = styled.button`
-  position: absolute;
-  height: 70px;
-  width: 70px;
-
-  -webkit-appearance: none;
-  box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.5),
-    10px 10px 15px rgba(70, 70, 70, 0.12);
-  transform: translate(-50%, -50%);
-  outline: none;
-
-  font-size: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  bottom: 25px;
-  right: 25px;
-
-  border: 8px solid #ececec;
-  box-sizing: border-box;
-  border-radius: 50%;
-
-  cursor: pointer;
-
-  svg {
-    color: #7a7a7a;
-    font-size: 21px;
-  }
-
-  :active {
-    box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.5),
-      10px 10px 15px rgba(70, 70, 70, 0.12),
-      inset -10px -10px 15px rgba(255, 255, 255, 0.5),
-      inset 10px 10px 15px rgba(70, 70, 70, 0.12);
-
-    svg {
-      color: #15a38a;
-    }
-  }
-
-  span {
-    font-weight: bold;
-    font-size: 12px;
-    color: rgba(0, 26, 255, 0.7);
-  }
-
-  @media (max-width: 1100px) {
-    bottom: 5px;
-    right: 5px;
-  }
 `;
 
 export const BtnBase = styled.button`
@@ -172,7 +204,7 @@ export const BtnBase = styled.button`
 
   :hover {
     cursor: pointer;
-    background: rgba(230, 230, 227, 1);
+    background: #e6e6e3;
 
     svg {
       color: #15a38a;
@@ -188,11 +220,13 @@ export const BtnBase = styled.button`
 
 export const Division = styled.div`
   position: relative;
-  /* bottom: -15px; */
   width: 100%;
-  height: 25px;
-  background: #ffffff;
+  height: 15px;
+  background: #F4F8FA;
+  margin-bottom: 3px;
 
+  border-bottom-left-radius: 9px;
+  border-bottom-right-radius: 9px;
 
   display: flex;
   justify-content: center;
@@ -200,32 +234,23 @@ export const Division = styled.div`
 `;
 
 export const BtnHide = styled(BtnBase)`
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  margin-right: 9px;
+  width: 45px;
+  border-radius: 25px;
+  background: #F4F8FA;
 `;
-
-export const TotalValues = styled.div`
-  color: #7a7a7a;
-  font-weight: bold;
-  font-size: 10px;
-`;
-
 
 export const Body = styled.div<ExpandProps>`
   position: relative;
   width: 100%;
   ${p => (p.isExpandHeader ? css`
-    height: calc(100% - 180px);
+    height: calc(100% - 231px);
   ` : css`
-    height: calc(100% - 100px);
+    height: calc(100% - 150px);
   `
   )}
 
   background: #F9FCFE;
-  border-bottom-left-radius: 9px;
-  border-bottom-right-radius: 9px;
+  border-radius: 9px;;
   padding: 0 0 5px 5px;
   display: flex;
   flex-direction: row;

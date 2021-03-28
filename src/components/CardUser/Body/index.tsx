@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { uuid } from 'uuidv4';
 import { FormHandles } from '@unform/core';
 import { useHome, UserProps, ValueProps } from '../../../hooks/home';
@@ -32,15 +32,16 @@ const Body: React.FC<UserProps> = ({ id }) => {
     <Wrapper>
       <TagList>
         {user?.values && user.values.map((valueCurrent: ValueProps) => {
-          return <TagValue
-          key={uuid()}
-          valueCurrent={valueCurrent}
-          width='102px'
-          height='35px'
-          padding='5px'
-          handleRemove={() => removeValueFromUser(valueCurrent.id, user.id)}
-
-          />;
+          return (
+            <TagValue
+              key={uuid()}
+              valueCurrent={valueCurrent}
+              width='102px'
+              height='35px'
+              padding='5px'
+              handleRemove={() => removeValueFromUser(valueCurrent.id, user.id)}
+            />
+          );
         })}
       </TagList>
       <Form onSubmit={handleAddNewValue}>

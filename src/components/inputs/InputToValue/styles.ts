@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
-import colors from '../../styles/colors';
+import colors from '../../../styles/colors';
 
-import Tooltip from '../Tooltip';
+import Tooltip from '../../Tooltip';
 
 interface ContainerProps {
   isFocused: boolean;
@@ -13,7 +13,6 @@ interface ContainerProps {
 }
 
 export const Container = styled.div<ContainerProps>`
-  position: absolute;
   background: #ffffff;
   border-radius: 50px;
   top: 5px;
