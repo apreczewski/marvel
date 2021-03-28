@@ -9,6 +9,7 @@
     "broccoli-funnel": "^3.0.3",
     "date-fns": "^2.14.0",
     "filesize": "^6.1.0",
+    "firebase-tools": "^9.8.0",
     "history": "^4.10.1",
     "i18next-parser": "^3.7.0",
     "polished": "^3.6.3",

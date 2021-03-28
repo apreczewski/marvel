@@ -4,7 +4,7 @@ import { FormHandles } from '@unform/core';
 import { useHome, UserProps, ValueProps } from '../../../hooks/home';
 import TagValue from '../../TagValue';
 import { Form } from '@unform/web';
-import Input from '../../../components/Input';
+import Input from '../../../components/inputs/InputtoCard';
 
 import { Wrapper } from './styles';
 import { useTranslation } from 'react-i18next';
