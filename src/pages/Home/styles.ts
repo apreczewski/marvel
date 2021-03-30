@@ -20,8 +20,9 @@ export const Background = styled.div`
   height: 25rem;
   width: 100%;
 
-  @media (max-height: 600px) {
+  @media (max-width: 600px) {
     height: 15rem;
+    width: 100%;
   }
 `;
 
@@ -30,19 +31,55 @@ export const Container = styled.div`
   width: 60.1rem;
   border-radius: 9px;
 
-  @media (max-height: 600px) {
-    margin: 0 2rem;
-    height: 33rem;
+  @media (max-width: 1200px) {
+    width: 45rem;
   }
+
+  @media (max-width: 800px) {
+    width: 35rem;
+  }
+
+  @media (max-width: 700px) {
+    width: 30rem;
+  }
+
+  @media (max-width: 600px) {
+    width: 25rem;
+  }
+
+  @media (max-width: 500px) {
+    width: 20rem;
+  }
+
+  @media (max-width: 400px) {
+    width: 19rem;
+  }
+
+  @media (max-height: 900px) {
+    height: 35rem;
+  }
+
+  @media (max-height: 800px) {
+    height: 30rem;
+  }
+
+  @media (max-height: 700px) {
+    height: 28rem;
+  }
+
+  @media (max-height: 600px) {
+    height: 25rem;
+  }
+
 `;
 
 export const Header = styled.div`
   position: relative;
   width: 100%;
   height: 50px;
-  margin-bottom: 3px;
   padding: 10px;
   border-radius: 9px;
+  margin-bottom: 3px;
 
   display: flex;
   flex-direction: row;
@@ -50,12 +87,25 @@ export const Header = styled.div`
   align-items: center;
 
   background: #F4F8FA;
+
+  @media (max-width: 400px) {
+    padding: 5px;
+  }
+
 `;
 
 export const SubHeaderLeft = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  @media (max-width: 800px) {
+    margin-right: 5px;
+  }
+
+  @media (max-width: 400px) {
+    margin-right: 3px;
+  }
 `;
 
 export const BtnAddUser = styled.button`
@@ -79,7 +129,6 @@ export const BtnAddUser = styled.button`
     color: #7a7a7a;
   }
 
-
   &:hover {
     background: ${shade(0.10, '#e6e6e3')};
 
@@ -95,13 +144,26 @@ export const BtnAddUser = styled.button`
       color: #15a38a;
     }
   }
+
+  @media (max-width: 800px) {
+    width: 35px;
+    height: 35px;
+    margin: 0 5px;
+    border-radius: 50%;
+  }
+
+  @media (max-width: 400px) {
+    width: 35px;
+    height: 35px;
+    margin: 3px;
+    border-radius: 50%;
+  }
 `;
 
 export const TotalValues = styled.div`
   width: 130px;
   height: 35px;
   padding: 10px 15px;
-
   border-radius: 25px;
   background: #e6e6e3;
 
@@ -118,6 +180,10 @@ export const TotalValues = styled.div`
     white-space: nowrap;
     text-overflow: ellipsis;
     text-align: center;
+  }
+
+  @media (max-width: 800px) {
+    width: 80px;
   }
 `;
 
@@ -180,6 +246,11 @@ export const ListTags = styled.div`
   grid-template-areas: "avalue avalue";
 
   ${scrollbarThin};
+
+  @media (max-width: 600px) {
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const BtnBase = styled.button`
@@ -279,4 +350,9 @@ export const ListUsers = styled.div<ExpandProps>`
   padding: 5px 0;
 
   ${scrollbarThin};
+
+  @media (max-width: 600px) {
+    justify-content: center;
+    align-items: center;
+  }
 `;
