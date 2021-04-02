@@ -10,22 +10,22 @@ interface WrapperProps {
 
 export const Wrapper = styled.div<WrapperProps>`
   width: ${p => !!p.width ? p.width : '130px'};
-  height: ${p => !!p.height ? p.height : '35px'};
+  height: ${p => !!p.height ? p.height : '30px'};
   background: #142b581a;
   border-radius: 25px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0 ${p => !!p.padding ? p.padding : '10px'};
-  border: 1px solid #00000030;
+  /* padding: 0 ${p => !!p.padding ? p.padding : '10px'}; */
+  /* border: 1px solid #00000030; */
 `;
 
 
-export const Info = styled.div`
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
+export const Info = styled.div<WrapperProps>`
+  width: ${p => !!p.height ? p.height : '30px'};
+  height: ${p => !!p.height ? p.height : '30px'};
+  border-radius: 25px;
   padding: 2px;
 
   display: flex;
@@ -65,7 +65,7 @@ export const AnchorValue = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 70px;
+  width: 60px;
   /* background: green; */
 `;
 
@@ -80,10 +80,10 @@ export const Value = styled.div`
   text-overflow: ellipsis;
 `;
 
-export const Close = styled.div`
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
+export const Close = styled.div<WrapperProps>`
+  width: ${p => !!p.height ? p.height : '30px'};
+  height: ${p => !!p.height ? p.height : '30px'};
+  border-radius: 25px;
   padding: 2px;
 
 
@@ -93,7 +93,6 @@ export const Close = styled.div`
 
 
   > svg {
-    color: red;
     width: 8px;
     height: 8px;
   }
@@ -101,10 +100,10 @@ export const Close = styled.div`
   cursor: pointer;
 
   :hover {
-    background: red;
+    background: #ececec;
 
     svg {
-      color: white;
+      color: red;
     }
   }
 `;

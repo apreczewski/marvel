@@ -20,14 +20,14 @@ const TagValue: React.FC<TagProps> = ({ valueCurrent, width, height, padding, ha
 
   return (
     <Wrapper width={width} height={height} padding={padding}>
-      <Info>
+      <Info height={height}>
         <FaCog size={12} />
       </Info>
       <AnchorValue>
-        <Description>{description}</Description>
+        <Description>dfsdfsfee{description}</Description>
         <Value>{formatValue({value})}</Value>
       </AnchorValue>
-      <Close onClick={handleRemove}>
+      <Close height={height} onClick={handleRemove}>
         <FaTimes size={12} />
       </Close>
     </Wrapper>

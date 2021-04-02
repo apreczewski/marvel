@@ -36,8 +36,8 @@ const Body: React.FC<UserProps> = ({ id }) => {
             <TagValue
               key={uuid()}
               valueCurrent={valueCurrent}
-              width='102px'
-              height='35px'
+              width='115px'
+              height='27px'
               padding='5px'
               handleRemove={() => removeValueFromUser(valueCurrent.id, user.id)}
             />

@@ -28,31 +28,31 @@ export const Background = styled.div`
 
 export const Container = styled.div`
   height: 45rem;
-  width: 60.1rem;
+  width: 65.1rem;
   border-radius: 9px;
 
   @media (max-width: 1200px) {
-    width: 45rem;
+    width: 47rem;
   }
 
   @media (max-width: 800px) {
-    width: 35rem;
+    width: 37rem;
   }
 
   @media (max-width: 700px) {
-    width: 30rem;
+    width: 37rem;
   }
 
   @media (max-width: 600px) {
-    width: 25rem;
+    width: 27rem;
   }
 
   @media (max-width: 500px) {
-    width: 20rem;
+    width: 22rem;
   }
 
   @media (max-width: 400px) {
-    width: 19rem;
+    width: 21rem;
   }
 
   @media (max-height: 900px) {
@@ -342,8 +342,8 @@ export const HideButtonFooter = styled(BtnBase)`
 export const ListUsers = styled.div<ExpandProps>`
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(229px, auto));
-  grid-template-rows: repeat(auto-fill, minmax(260px, auto));
+  grid-template-columns: repeat(auto-fill, minmax(250px, auto));
+  grid-template-rows: repeat(auto-fill, minmax(270px, auto));
   grid-gap: 9px;
   justify-content: flex-start;
   overflow: auto;

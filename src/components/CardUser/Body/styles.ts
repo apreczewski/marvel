@@ -7,8 +7,8 @@ export const Wrapper = styled.div`
 export const TagList = styled.div`
   height: 156px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(105px, auto));
-  grid-template-rows: repeat(auto-fill, minmax(35px, 35px));
+  grid-template-columns: repeat(auto-fill, minmax(115px, auto));
+  grid-template-rows: repeat(auto-fill, minmax(27px, 27px));
   grid-gap: 5px;
   justify-content: flex-start;
   padding: 5px;
