@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
 
+import { FaRegCopy } from 'react-icons/fa';
 import { formatValue } from '../../../utils/format';
-import { UserProps,  } from '../../../hooks/home'
+import { UserProps  } from '../../../hooks/home'
 
-import { Wrapper } from './styles';
-
+import { Wrapper, Copy } from './styles';
 
 const Footer: React.FC<UserProps> = ({ values }) => {
 
@@ -16,15 +16,10 @@ const Footer: React.FC<UserProps> = ({ values }) => {
 
   return (
     <Wrapper>
-      {/* <Form onSubmit={handleAddNewValue}>
-        <Input name='value' placeholder={t("add value")} height="25px" width="100%" />
-      </Form> */}
-      {/* <AddAllValoes >
-        {t('All')}
-      </AddAllValoes> */}
-      {/* <span>{`R$ ${formatCurrency(total, 'BRL', 'pt-BR')}`}</span> */}
-
-      <span>{formatValue({value: getValueTotal().toString()})}</span>
+      <div title={formatValue({value: getValueTotal().toString()})}>{formatValue({value: getValueTotal().toString()})}</div>
+      <Copy>
+        <FaRegCopy size={15} />
+      </Copy>
     </Wrapper>
   );
 }

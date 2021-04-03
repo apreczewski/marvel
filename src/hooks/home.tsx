@@ -49,11 +49,6 @@ export const HomeProvider: React.FC = ({ children }) => {
     setUsers([...users, user]);
   }, [users]);
 
-  const removeUser = useCallback((userId: string) => {
-    const newUsers = users.filter(user => user.id !== userId);
-    setUsers(newUsers);
-  }, [users])
-
   const updateValue = useCallback((valueId, userId, description?, dividedValue?) => {
     const newValues = values.map(value => {
       if(valueId === value.id && !!value?.usersIds){
@@ -216,6 +211,12 @@ export const HomeProvider: React.FC = ({ children }) => {
 
   }, [users, values, removeValueFromValues]);
 
+  const removeUser = useCallback((userId: string) => {
+    const newUsers = users.filter(user => user.id !== userId);
+
+
+    setUsers(newUsers);
+  }, [users])
 
   return (
     <HomeContext.Provider value={{

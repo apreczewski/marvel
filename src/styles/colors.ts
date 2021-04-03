@@ -1,10 +1,10 @@
 export default {
 
-  /** @property  '#043E50' */
-  default: '#043E50',
+  /** @property  '#34495B' */
+  default: '#34495B',
 
-  /** @property  '#069581' */
-  _default: '#069581',
+  /** @property  '#728D9B' */
+  secundary: '#728D9B',
 
 
   /** @property  '#d8d8d8' */

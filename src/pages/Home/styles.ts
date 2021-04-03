@@ -26,29 +26,66 @@ export const Background = styled.div`
   }
 `;
 
+
+export const Profile = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  border: none;
+  text-decoration: none;
+
+  width: 40px;
+  height: 40px;
+  background: ${colors.greenyBlue};
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  > svg {
+    width: 20px;
+    height: 20px;
+    color: #F4F8FA;
+  }
+
+  > img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+  }
+
+  @media (max-width: 700px) {
+    top: 5px;
+    right: 5px;
+
+    width: 30px;
+    height: 30px;
+
+    > svg {
+      width: 15px;
+      height: 15px;
+      color: #F4F8FA;
+    }
+  }
+`;
+
 export const Container = styled.div`
   height: 45rem;
   width: 65.1rem;
   border-radius: 9px;
 
-  @media (max-width: 1200px) {
-    width: 47rem;
+  @media (max-width: 1400px) {
+    width: 49rem;
   }
 
-  @media (max-width: 800px) {
-    width: 37rem;
-  }
-
-  @media (max-width: 700px) {
-    width: 37rem;
-  }
-
-  @media (max-width: 600px) {
-    width: 27rem;
+  @media (max-width: 1100px) {
+    width: 33rem;
   }
 
   @media (max-width: 500px) {
-    width: 22rem;
+    width: 25rem;
   }
 
   @media (max-width: 400px) {
@@ -56,19 +93,15 @@ export const Container = styled.div`
   }
 
   @media (max-height: 900px) {
-    height: 35rem;
+    height: 42rem;
   }
 
   @media (max-height: 800px) {
-    height: 30rem;
+    height: 38rem;
   }
 
   @media (max-height: 700px) {
-    height: 28rem;
-  }
-
-  @media (max-height: 600px) {
-    height: 25rem;
+    height: 32rem;
   }
 
 `;
@@ -89,22 +122,55 @@ export const Header = styled.div`
   background: #F4F8FA;
 
   @media (max-width: 400px) {
-    padding: 5px;
+    /* padding: 5px; */
   }
 
+  form {
+    width: 100%;
+    margin-right: 10px;
+
+    input {
+      text-decoration: none;
+      border: none;
+
+      color: ${colors.charcoalGreyTwo};
+      font-size: 12px;
+      width: 100%;
+      height: 40px;
+      border-radius: 25px;
+      padding: 0 20px;
+    }
+  }
 `;
 
-export const SubHeaderLeft = styled.div`
+export const HeaderLeft = styled.div`
   display: flex;
-  flex-direction: row;
+  width: auto;
+`;
+
+export const TotalValues = styled.div`
+  width: 130px;
+  height: 35px;
+  padding: 10px 15px;
+  border-radius: 25px;
+  background: #e6e6e3;
+
+  color: #7a7a7a;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
   align-items: center;
 
-  @media (max-width: 800px) {
-    margin-right: 5px;
+  > span {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
   }
 
-  @media (max-width: 400px) {
-    margin-right: 3px;
+  @media (max-width: 500px) {
+    width: 100px;
   }
 `;
 
@@ -145,79 +211,18 @@ export const BtnAddUser = styled.button`
     }
   }
 
-  @media (max-width: 800px) {
-    width: 35px;
-    height: 35px;
-    margin: 0 5px;
-    border-radius: 50%;
+  @media (max-width: 500px) {
+    width: 100px;
   }
 
-  @media (max-width: 400px) {
+  /* @media (max-width: 400px) {
     width: 35px;
     height: 35px;
     margin: 3px;
     border-radius: 50%;
-  }
+  } */
 `;
 
-export const TotalValues = styled.div`
-  width: 130px;
-  height: 35px;
-  padding: 10px 15px;
-  border-radius: 25px;
-  background: #e6e6e3;
-
-
-  color: #7a7a7a;
-  font-size: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  > span {
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    text-align: center;
-  }
-
-  @media (max-width: 800px) {
-    width: 80px;
-  }
-`;
-
-export const SubHeaderRight = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-export const Profile = styled.button`
-  border: none;
-  text-decoration: none;
-
-  width: 35px;
-  height: 35px;
-  background: ${colors.greenyBlue};
-  border-radius: 50%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  > svg {
-    width: 20px;
-    height: 20px;
-    color: #F4F8FA;
-  }
-
-  > img {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-  }
-`
 
 interface ExpandProps {
   isExpandHeader: boolean;
@@ -343,7 +348,7 @@ export const ListUsers = styled.div<ExpandProps>`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, auto));
-  grid-template-rows: repeat(auto-fill, minmax(270px, auto));
+  grid-template-rows: repeat(auto-fill, minmax(257px, auto));
   grid-gap: 9px;
   justify-content: flex-start;
   overflow: auto;

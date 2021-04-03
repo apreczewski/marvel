@@ -1,31 +1,56 @@
 import styled from 'styled-components';
+import { shade } from 'polished';
+import colors from '../../../styles/colors';
 
 export const Wrapper = styled.div`
   position: relative;
-  height: 55px;
+  height: 40px;
   width: 100%;
+
+  border-bottom-left-radius: 9px;
+  border-bottom-right-radius: 9px;
+  background: ${colors.secundary};
+
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 5px;
 
-  span {
-    color: #7a7a7a;
+  div {
+    color: white;
     font-size: 12px;
+
+    width: auto;
+    max-width: 100px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
 `;
 
-export const AddAllValoes = styled.button`
+
+export const Copy = styled.button`
   position: absolute;
-  top: 5px;
   right: 10px;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
 
-  font-size: 12px;
-  text-decoration: none;
+  background: none;
   border: none;
-  background: #716B65;
+  text-decoration: none;
 
-  border-radius: 50px;
-  padding: 5px;
+  cursor: pointer;
+
+  svg {
+    font-size: 16px;
+    color: white;
+  }
+
+  :hover {
+    background: ${shade(0.01, '#5D7685')};
+  }
 `;

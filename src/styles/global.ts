@@ -1,5 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 
+//https://pigment.shapefactory.co/?a=34495b&b=728d9b
+// https://pigment.shapefactory.co/?a=c4250e&b=cb2d1b
+
+
 export default createGlobalStyle`
   * {
     margin: 0;

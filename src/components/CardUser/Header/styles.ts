@@ -1,38 +1,61 @@
 import styled from 'styled-components';
+import { shade } from 'polished';
+import colors from '../../../styles/colors';
 
 export const Wrapper = styled.div`
   position: relative;
-  height: 55px;
+  height: 40px;
   width: 100%;
+  background: ${colors.secundary};
+  border-top-left-radius: 9px;
+  border-top-right-radius: 9px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  padding: 5px;
-  border-bottom: 1px solid #EEF2F5;
+  padding: 0 10px;
 `;
 
 export const Image = styled.div`
-  height: 28px;
-  width: 28px;
-  padding: 20px;
-  background: #F4F8FA;
+  height: 30px;
+  width: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 5px;
   border-radius: 50%;
+
+  cursor: pointer;
 
   svg {
     font-size: 16px;
-    color: blue;
+    color: white;
+  }
+
+  :hover {
+    background: ${shade(0.01, '#638293')};
   }
 `;
 
 export const Content = styled.div`
-  width: 140px;
+  width: 160px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: initial;
+
+
+  form {
+    div {
+        height: 30px;
+        border-radius: 25px;
+        /* background: red; */
+
+
+    }
+  }
+
+
+
 `;
 
 export const Name = styled.div`
@@ -44,59 +67,44 @@ export const Name = styled.div`
   overflow: hidden;
 `;
 
-export const AddUser = styled.button`
+export const AddUser = styled.input`
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+
+  background: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 5px;
-  color: #6C63FF;
+  color: white;
 
   border: none;
-  background: none;
   text-decoration: none;
 
-  svg {
-    font-size: 12px;
-    margin-right: 5px;
-    font-weight: bold;
-  }
-
-  span {
-    font-size: 12px;
-    font-weight: bold;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+  :hover {
+    background: ${shade(0.01, '#5D7685')};
   }
 `;
 
 export const Close = styled.div`
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  padding: 3px;
-  border-radius: 50px;
+  height: 30px;
+  width: 30px;
+  border-radius: 25px;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  right: 5px;
+  right: 0;
   cursor: pointer;
 
-  svg {
-    color: red;
-  }
+
 
   :hover {
-    width: 20px;
-    height: 20px;
-    background: red;
-    border-radius: 50px;
-    padding: 3px;
+    background: ${shade(0.01, '#5D7685')};
 
     svg {
-      color: white;
+      color: #9B1205;
     }
   }
 `;

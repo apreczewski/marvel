@@ -14,7 +14,7 @@ import { ImUserPlus, ImUser } from 'react-icons/im'
 import TagValue from '../../components/TagValue';
 
 import {
-  Wrapper, Container, Header, SubHeaderLeft, SubHeaderRight, Profile, Background, AnchorListTags, ListTags,
+  Wrapper, Container, Header, HeaderLeft, Profile, Background, AnchorListTags, ListTags,
   Division, BtnHide, Body, BtnAddUser, TotalValues,
   ListUsers
 } from './styles';
@@ -71,23 +71,21 @@ const Home: React.FC = () => {
   return (
     <Wrapper>
       <Background />
+      <Profile>
+        {!auth && <ImUser size={15} />}
+        {auth && <img src="https://media-exp1.licdn.com/dms/image/C4D03AQFKwwmfM08O4A/profile-displayphoto-shrink_200_200/0/1590517310562?e=1622678400&v=beta&t=gmp6bAnPSPkQmDSpmNMX1GkTTABTOKVlv56EIjoXFYA" alt="imageProfile"/>}
+      </Profile>
       <Container>
         <Header>
-          <SubHeaderLeft>
-            <Form ref={formRef} onSubmit={handleAddNewValue}>
-              <Input name="value" placeholder={t("add value")} />
-            </Form>
+          <Form ref={formRef} onSubmit={handleAddNewValue}>
+            <Input name="value" placeholder={t("add value")} />
+          </Form>
+          <HeaderLeft>
+            <TotalValues><span>{formatValue({value: getValueTotal().toString()})}</span></TotalValues>
             <BtnAddUser onClick={handleAddNewUser}>
               <ImUserPlus size={15} />
             </BtnAddUser>
-            <TotalValues><span>{formatValue({value: getValueTotal().toString()})}</span></TotalValues>
-          </SubHeaderLeft>
-          <SubHeaderRight>
-            <Profile>
-              {!auth && <ImUser size={15} />}
-              {auth && <img src="https://media-exp1.licdn.com/dms/image/C4D03AQFKwwmfM08O4A/profile-displayphoto-shrink_200_200/0/1590517310562?e=1622678400&v=beta&t=gmp6bAnPSPkQmDSpmNMX1GkTTABTOKVlv56EIjoXFYA" alt="imageProfile"/>}
-            </Profile>
-          </SubHeaderRight>
+          </HeaderLeft>
         </Header>
         <AnchorListTags isExpandHeader={isExpandHeader}>
           {values &&

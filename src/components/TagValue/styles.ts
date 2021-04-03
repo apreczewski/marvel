@@ -11,14 +11,12 @@ interface WrapperProps {
 export const Wrapper = styled.div<WrapperProps>`
   width: ${p => !!p.width ? p.width : '130px'};
   height: ${p => !!p.height ? p.height : '30px'};
-  background: #142b581a;
+  background: #90ABB8;
   border-radius: 25px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  /* padding: 0 ${p => !!p.padding ? p.padding : '10px'}; */
-  /* border: 1px solid #00000030; */
 `;
 
 
@@ -38,7 +36,7 @@ export const Info = styled.div<WrapperProps>`
   }
 
   :hover {
-    background: #ececec;
+    background: #638293;
 
     svg {
       color: white;
@@ -64,15 +62,15 @@ export const AnchorValue = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   width: 60px;
-  /* background: green; */
+  align-items: center;
+  text-align: center;
 `;
 
 export const Value = styled.div`
   color: ${colors.charcoalGreyTwo};
   font-size: 11px;
-  text-align: center;
+  /* text-align: center; */
 
   width: 100%;
   overflow: hidden;
@@ -100,10 +98,10 @@ export const Close = styled.div<WrapperProps>`
   cursor: pointer;
 
   :hover {
-    background: #ececec;
+    background: #5D7685;
 
     svg {
-      color: red;
+      color: #9B1205;
     }
   }
 `;
