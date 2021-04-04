@@ -228,15 +228,15 @@ export const HomeProvider: React.FC = ({ children }) => {
   }, []);
 
   const removeUser = useCallback((userId: string) => {
-    let newListValues: ValueProps[] = values;
+    let newListValues: ValueProps[] = values
     const userDelete = users.find(user => user.id === userId);
 
     //check if the last user to value
     userDelete?.values?.forEach(value => {
-      const valueFinded = values.find(valueFind => valueFind.id === value.id);
+      const valueFinded = newListValues.find(valueFind => valueFind.id === value.id);
 
       if(valueFinded?.usersIds?.length === 1){
-        newListValues = values.filter(valueFilter => valueFilter.id !== value.id);
+        newListValues = newListValues.filter(valueFilter => valueFilter.id !== value.id);
       }
     })
 
