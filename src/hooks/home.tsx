@@ -125,12 +125,10 @@ export const HomeProvider: React.FC = ({ children }) => {
     }
   }, [values, users]);
 
-  const removeValueFromUser = useCallback((valueId: string, userId: string) => {
-
-    //remove value all users
+  const listUserRemoveUserIdValueId = useCallback((valueId, userId) => {
     const newUsers = users.map(user => {
 
-      //remove the userId from list values
+      //remove value from user list values
       if(user.id === userId){
         const { values: valuesCurrent } = user;
 
@@ -141,27 +139,15 @@ export const HomeProvider: React.FC = ({ children }) => {
 
       return user;
     })
-    // console.log('newUsers >> ', newUsers);
-    setUsers(newUsers);
 
-    //check if last userId
-    const checkUserId = values.filter(value => value.id === valueId);
-    const { usersIds } = checkUserId[0]
-
-    if(usersIds?.length === 1){
-      removeValueFromValues(valueId)
-      return;
-    }
+    return newUsers;
+  }, [users])
 
 
-    // remove userId of value
-    const newListValues = values.map(value => {
+  const listValueRemoveUserIdValueId = useCallback((valueId, userId) => {
+    const newValues = values.map(value => {
       if(value.id === valueId){
         const { usersIds } = value;
-
-        // if(usersIds?.length === 1 ){
-        //   return undefined;
-        // }
 
         const newUsersIds = usersIds?.filter(id => id !== userId);
 
@@ -179,44 +165,121 @@ export const HomeProvider: React.FC = ({ children }) => {
       return value;
     }).filter(value => value !== undefined);
 
-    // if(!!newListValues){
-    setValues(newListValues);
+    return newValues;
+  }, [values]);
 
-    // }
+
+  const listUserlistValueRecalculate = useCallback((listUsers, valueId, valueRelaculated) => {
+    const newListUserNewListValue = listUsers.map((user: UserProps)  => {
+      const newValues = user.values?.map(value => {
+        if(valueId === value.id && valueRelaculated?.dividedValue !== undefined){
+          return {...value, value: valueRelaculated?.dividedValue}
+        }
+
+        return value;
+      });
+
+      return {...user, values: newValues}
+    })
+
+    return newListUserNewListValue;
+  },[])
+
+  const removeValueFromUser = useCallback((valueId, userId) => {
+
+    const newUsers = listUserRemoveUserIdValueId(valueId, userId);
+    setUsers(newUsers);
+
+    const valueFinded = values.find(value => value.id === valueId);
+
+    if(valueFinded?.usersIds?.length === 1){
+      removeValueFromValues(valueId)
+      return;
+    }
+
+    const newValues = listValueRemoveUserIdValueId(valueId, userId)
+    setValues(newValues);
 
     // recalc value and set new value on users
-    const valueRecalc = newListValues.filter(value => value.id === valueId)
+    const valueRelaculated = newValues.find(value => value.id === valueId)
 
-    const newUserNewValue = newUsers.map(user => {
-      if(user.id !== userId){
-        const { values } = user;
-        const { dividedValue } = valueRecalc[0];
+    const newListUserNewListValueRecalculate = listUserlistValueRecalculate(newUsers, valueId, valueRelaculated);
 
-        const newValues = values?.map(value => {
-          if(valueId === value.id && dividedValue !== undefined){
-            return {...value, value: dividedValue}
-          }
-          return value;
-        });
+    setUsers(newListUserNewListValueRecalculate);
 
-        return {...user, values: newValues}
+    return newListUserNewListValueRecalculate;
+
+  }, [values, removeValueFromValues, listUserRemoveUserIdValueId, listValueRemoveUserIdValueId, listUserlistValueRecalculate]);
+
+
+  const updateValuesOfListFromUser = useCallback((userCurrent, listValuesCurrent) => {
+    const newListValueToUser = userCurrent?.values?.map((value: ValueProps) => {
+
+      const valueFiltered = listValuesCurrent?.find((newValue: ValueProps) => newValue.id === value.id);
+
+      if(valueFiltered !== undefined){
+        return {...value, value: valueFiltered.dividedValue};
       }
 
-      return user;
-    })
-    console.log('newUserNewValue >> ', newUserNewValue);
+      return value;
+    });
 
-
-    setUsers(newUserNewValue);
-
-  }, [users, values, removeValueFromValues]);
+    return newListValueToUser;
+  }, []);
 
   const removeUser = useCallback((userId: string) => {
-    const newUsers = users.filter(user => user.id !== userId);
+    let newListValues: ValueProps[] = values;
+    const userDelete = users.find(user => user.id === userId);
 
+    //check if the last user to value
+    userDelete?.values?.forEach(value => {
+      const valueFinded = values.find(valueFind => valueFind.id === value.id);
 
+      if(valueFinded?.usersIds?.length === 1){
+        newListValues = values.filter(valueFilter => valueFilter.id !== value.id);
+      }
+    })
+
+    //remove user of list values
+    newListValues = newListValues.map(value => {
+      const hasUser = value.usersIds?.find(user => user === userId);
+
+      if(hasUser){
+        const newUsersIds = value.usersIds?.filter(user => user !== userId);
+
+        if(newUsersIds !== undefined){
+          let dividedValue = (parseFloat(value.value)/newUsersIds?.length).toString();
+
+          return {
+            ...value,
+            dividedValue,
+            usersIds: newUsersIds
+          };
+        }
+
+        return {...value, usersIds: newUsersIds}
+      }
+
+      return value;
+    })
+    setValues(newListValues);
+
+    //remove user of list values
+    const usersFiltered = users.filter(user => user.id !== userId);
+
+     //add new values to users
+    const newUsers = usersFiltered.map(user => {
+
+      if(user !== undefined && user.values !== undefined){
+        const newListValueToUser = updateValuesOfListFromUser(user, newListValues)
+
+        return {...user, values: newListValueToUser };
+      }
+      return user;
+    }).filter(item => item !== undefined);
     setUsers(newUsers);
-  }, [users])
+
+  }, [users, values, updateValuesOfListFromUser])
 
   return (
     <HomeContext.Provider value={{
