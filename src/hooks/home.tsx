@@ -213,6 +213,8 @@ export const HomeProvider: React.FC = ({ children }) => {
 
 
   const updateValuesOfListFromUser = useCallback((userCurrent, listValuesCurrent) => {
+    console.log(listValuesCurrent);
+
     const newListValueToUser = userCurrent?.values?.map((value: ValueProps) => {
 
       const valueFiltered = listValuesCurrent?.find((newValue: ValueProps) => newValue.id === value.id);
@@ -246,6 +248,8 @@ export const HomeProvider: React.FC = ({ children }) => {
 
       if(hasUser){
         const newUsersIds = value.usersIds?.filter(user => user !== userId);
+
+
 
         if(newUsersIds !== undefined){
           let dividedValue = (parseFloat(value.value)/newUsersIds?.length).toString();

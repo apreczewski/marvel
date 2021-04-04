@@ -19,7 +19,7 @@ const Header: React.FC<UserProps> = (user) => {
 
   const handleAddNewValue = useCallback(({value}) => {
     if (!!value) {
-      const valueCurrent = { id: uuid(), value, usersIds: [id], description: '', dividedValue: '' } ;
+      const valueCurrent = { id: uuid(), value, usersIds: [id], description: '', dividedValue: value } ;
 
       addValueToUser(id, valueCurrent);
       addValue(valueCurrent);
