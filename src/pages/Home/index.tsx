@@ -8,6 +8,7 @@ import { formatValue } from '../../utils/format';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 
+import Modal from '../../components/Modal';
 
 import { FaAngleDoubleDown, FaAngleDoubleUp } from 'react-icons/fa'
 import { ImUserPlus, ImUser } from 'react-icons/im'
@@ -75,6 +76,7 @@ const Home: React.FC = () => {
         {!auth && <ImUser size={15} />}
         {auth && <img src="https://media-exp1.licdn.com/dms/image/C4D03AQFKwwmfM08O4A/profile-displayphoto-shrink_200_200/0/1590517310562?e=1622678400&v=beta&t=gmp6bAnPSPkQmDSpmNMX1GkTTABTOKVlv56EIjoXFYA" alt="imageProfile"/>}
       </Profile>
+      <Modal isOpen={true} ><h1>test</h1></Modal>
       <Container>
         <Header>
           <Form ref={formRef} onSubmit={handleAddNewValue}>
