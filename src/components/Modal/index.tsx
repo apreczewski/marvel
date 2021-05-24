@@ -1,4 +1,4 @@
-import React, { Children, isValidElement, cloneElement, useState, ReactChildren } from 'react';
+import React from 'react';
 import './styles.css';
 
 import { ModalStyled } from './styles';

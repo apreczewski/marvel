@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { FaCog, FaTimes } from 'react-icons/fa';
-import { formatValue } from '../../utils/format';
+// import { formatValue } from '../../utils/format';
 
 import { ValueProps } from '../../hooks/home';
 
@@ -15,7 +15,7 @@ interface TagProps {
   handleRemove(): void
 }
 
-const TagValue: React.FC<TagProps> = ({ valueCurrent, width, height, padding, handleRemove  }) => {
+const TagValue: React.FC<TagProps> = ({ valueCurrent, width, height, padding, handleRemove }) => {
   const { value, description } = valueCurrent;
 
   return (
@@ -25,7 +25,7 @@ const TagValue: React.FC<TagProps> = ({ valueCurrent, width, height, padding, ha
       </Info>
       <AnchorValue>
         <Description>{description}</Description>
-        <Value title={formatValue({value})}>{formatValue({value})}</Value>
+        {/* <Value title={formatValue({ value })}>{formatValue({ value })}</Value> */}
       </AnchorValue>
       <Close height={height} onClick={handleRemove}>
         <FaTimes size={12} />

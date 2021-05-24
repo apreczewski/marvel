@@ -1,64 +1,31 @@
-# Sobre
+# Getting Started with Create React App
 
-Estes documento README tem como objetivo fornecer as informações necessárias para realização do projeto Empresas.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# 🏗 O que fazer?
+## Available Scripts
 
-- Você deve realizar um fork deste repositório e, ao finalizar, enviar o link do seu repositório para a nossa equipe. Lembre-se, NÃO é necessário criar um Pull Request para isso, nós iremos avaliar e retornar por email o resultado do seu teste.
+In the project directory, you can run:
 
-# 🚨 Requisitos
+### `yarn start`
 
-- Seu projeto deverá ser construído utilizando **ReactJS** ou **Angular**.
-- Seu projeto deverá ser construído utilizando o layout disponibilizado na descrição do teste.
-- A integração com a API deve ser feita respeitando todos os contratos de OAuth.
-- Projetos utilizando **ReactJS** serão aceitos testes somente em **JavaScript** buscando avaliar o entendimento completo da linguagem e não de estruturas ou dependências que abstraiam determinadas definições não alheias ao ECMAScript.
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-# 🕵🏻‍♂️ Itens a serem avaliados
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-- Estrutura do Projeto
-- Boas práticas da Linguagem/Framework
-- Integração com API
-- Bibliotecas utilizadas
-- Estilização dos componentes
-- Persistência de login
-- Layout responsivo
-- Friendly URL
-- Seu projeto deverá seguir tudo o que foi exigido na seção [O que desenvolver?](##--o-que-desenvolver)
 
-# 🎁 Extra
+## Authentication for Server-Side Applications
+Server-side applications must pass two parameters in addition to the apikey parameter:
 
-Esses itens não são obrigatórios, porém desejados.
+ts - a timestamp (or other long string which can change on a request-by-request basis)
+hash - a md5 digest of the ts parameter, your private key and your public key (e.g. md5(ts+privateKey+publicKey)
+For example, a user with a public key of "1234" and a private key of "abcd" could construct a valid call as follows: http://gateway.marvel.com/v1/public/comics?ts=1&apikey=1234&hash=ffd275c5130566a2916217b101f26150 (the hash value is the md5 digest of 1abcd1234)
+[marvel authorization]('https://developer.marvel.com/documentation/authorization)
 
-- Testes unitários
-- SEO
-- Linter
-- Code Formater
-- Documentação de componente
+## Create file .env
 
-# 🖥 O que desenvolver?
-
-Você deverá construir um projeto utilizando o layout proposto
-
-- Login e acesso de Usuário já registrado
-  - Para o login usamos padrões OAuth 2.0. Na resposta de sucesso do login a api retornará 3 custom headers (access-token, client, uid);
-  - Para ter acesso as demais APIS precisamos enviar esses 3 custom headers para a API autorizar a requisição;
-- Listagem de Empresas
-- Detalhamento de Empresas
-
-# 🔗 Links e Informações Importantes
-
-## Layout
-
-- Layout e recortes disponíveis no Zeplin
-- https://app.zeplin.io/
-- **usuário:** teste_web
-- **senha:** teste_ioasys
-
-## Integração com API
-
-- A documentação da API está disponível a partir de uma collection para Postman (https://www.getpostman.com/apps) neste repositório. Para utilizar a collection, vá até o postman e import a colllection que está disponível neste repositório, assim você terá acesso as documentação da API.
-
-- **Servidor:** http://empresas.ioasys.com.br
-- **Versão da API:** v1
-- **Usuário de Teste:** testeapple@ioasys.com.br
-- **Senha de Teste:** 12341234
+REACT_APP_BASE_URL="http://gateway.marvel.com/v1/public"
+REACT_APP_KEY_MARVEL_TS="1"
+REACT_APP_KEY_MARVEL_PUBLIC="your_key_public"
+REACT_APP_KEY_MARVEL_PRIVADO="your_key_private"

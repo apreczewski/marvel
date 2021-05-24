@@ -51,9 +51,11 @@ export const HomeProvider: React.FC = ({ children }) => {
 
   const updateValue = useCallback((valueId, userId, description?, dividedValue?) => {
     const newValues = values.map(value => {
-      if(valueId === value.id && !!value?.usersIds){
-        return {...value, description,
-          dividedValue, usersIds: [...value.usersIds, userId]}
+      if (valueId === value.id && !!value?.usersIds) {
+        return {
+          ...value, description,
+          dividedValue, usersIds: [...value.usersIds, userId]
+        }
       }
       return value
     })
@@ -63,11 +65,11 @@ export const HomeProvider: React.FC = ({ children }) => {
 
   const addValueToUser = useCallback((userId, valueDivided) => {
     const newUsers = users.map(user => {
-      if(user.id === userId && !!valueDivided){
-        if(!!user?.values){
-          return {...user, values: [...user.values, valueDivided ]};
+      if (user.id === userId && !!valueDivided) {
+        if (!!user?.values) {
+          return { ...user, values: [...user.values, valueDivided] };
         }
-        return {...user, values: [ valueDivided ]};
+        return { ...user, values: [valueDivided] };
       }
       return user;
     });
@@ -76,17 +78,17 @@ export const HomeProvider: React.FC = ({ children }) => {
   }, [users]);
 
   const addValueAllUsers = useCallback((valueDivided) => {
-      const newUsers = users.map(user => {
-        if(!!valueDivided){
-          if(!!user?.values){
-            return {...user, values: [...user.values, valueDivided ]};
-          }
-          return {...user, values: [ valueDivided ]};
+    const newUsers = users.map(user => {
+      if (!!valueDivided) {
+        if (!!user?.values) {
+          return { ...user, values: [...user.values, valueDivided] };
         }
-        return user;
-      });
+        return { ...user, values: [valueDivided] };
+      }
+      return user;
+    });
 
-      setUsers(newUsers);
+    setUsers(newUsers);
   }, [users]);
 
   const addValue = useCallback((valueCurrent: ValueProps) => {
@@ -100,15 +102,15 @@ export const HomeProvider: React.FC = ({ children }) => {
     if (!!valueId) {
 
       const newValues = values.filter(value => {
-        if(value.id === valueId ){
+        if (value.id === valueId) {
           const { usersIds } = value;
 
           const newUsers = users.map(user => {
-            if(usersIds?.includes(user.id)){
+            if (usersIds?.includes(user.id)) {
               const { values } = user;
               const newValues = values?.filter(value => value.id !== valueId)
 
-              return {...user, values: newValues }
+              return { ...user, values: newValues }
             }
 
             return user;
@@ -129,12 +131,12 @@ export const HomeProvider: React.FC = ({ children }) => {
     const newUsers = users.map(user => {
 
       //remove value from user list values
-      if(user.id === userId){
+      if (user.id === userId) {
         const { values: valuesCurrent } = user;
 
         const newValuesCurrent = valuesCurrent?.filter(value => value.id !== valueId);
 
-        return {...user, values: newValuesCurrent};
+        return { ...user, values: newValuesCurrent };
       }
 
       return user;
@@ -146,13 +148,13 @@ export const HomeProvider: React.FC = ({ children }) => {
 
   const listValueRemoveUserIdValueId = useCallback((valueId, userId) => {
     const newValues = values.map(value => {
-      if(value.id === valueId){
+      if (value.id === valueId) {
         const { usersIds } = value;
 
         const newUsersIds = usersIds?.filter(id => id !== userId);
 
-        if(newUsersIds !== undefined){
-          let dividedValue = (parseFloat(value.value)/newUsersIds?.length).toString();
+        if (newUsersIds !== undefined) {
+          let dividedValue = (parseFloat(value.value) / newUsersIds?.length).toString();
 
           return {
             ...value,
@@ -170,20 +172,20 @@ export const HomeProvider: React.FC = ({ children }) => {
 
 
   const listUserlistValueRecalculate = useCallback((listUsers, valueId, valueRelaculated) => {
-    const newListUserNewListValue = listUsers.map((user: UserProps)  => {
+    const newListUserNewListValue = listUsers.map((user: UserProps) => {
       const newValues = user.values?.map(value => {
-        if(valueId === value.id && valueRelaculated?.dividedValue !== undefined){
-          return {...value, value: valueRelaculated?.dividedValue}
+        if (valueId === value.id && valueRelaculated?.dividedValue !== undefined) {
+          return { ...value, value: valueRelaculated?.dividedValue }
         }
 
         return value;
       });
 
-      return {...user, values: newValues}
+      return { ...user, values: newValues }
     })
 
     return newListUserNewListValue;
-  },[])
+  }, [])
 
   const removeValueFromUser = useCallback((valueId, userId) => {
 
@@ -192,7 +194,7 @@ export const HomeProvider: React.FC = ({ children }) => {
 
     const valueFinded = values.find(value => value.id === valueId);
 
-    if(valueFinded?.usersIds?.length === 1){
+    if (valueFinded?.usersIds?.length === 1) {
       removeValueFromValues(valueId)
       return;
     }
@@ -219,8 +221,8 @@ export const HomeProvider: React.FC = ({ children }) => {
 
       const valueFiltered = listValuesCurrent?.find((newValue: ValueProps) => newValue.id === value.id);
 
-      if(valueFiltered !== undefined){
-        return {...value, value: valueFiltered.dividedValue};
+      if (valueFiltered !== undefined) {
+        return { ...value, value: valueFiltered.dividedValue };
       }
 
       return value;
@@ -237,7 +239,7 @@ export const HomeProvider: React.FC = ({ children }) => {
     userDelete?.values?.forEach(value => {
       const valueFinded = newListValues.find(valueFind => valueFind.id === value.id);
 
-      if(valueFinded?.usersIds?.length === 1){
+      if (valueFinded?.usersIds?.length === 1) {
         newListValues = newListValues.filter(valueFilter => valueFilter.id !== value.id);
       }
     })
@@ -246,13 +248,13 @@ export const HomeProvider: React.FC = ({ children }) => {
     newListValues = newListValues.map(value => {
       const hasUser = value.usersIds?.find(user => user === userId);
 
-      if(hasUser){
+      if (hasUser) {
         const newUsersIds = value.usersIds?.filter(user => user !== userId);
 
 
 
-        if(newUsersIds !== undefined){
-          let dividedValue = (parseFloat(value.value)/newUsersIds?.length).toString();
+        if (newUsersIds !== undefined) {
+          let dividedValue = (parseFloat(value.value) / newUsersIds?.length).toString();
 
           return {
             ...value,
@@ -261,7 +263,7 @@ export const HomeProvider: React.FC = ({ children }) => {
           };
         }
 
-        return {...value, usersIds: newUsersIds}
+        return { ...value, usersIds: newUsersIds }
       }
 
       return value;
@@ -271,13 +273,13 @@ export const HomeProvider: React.FC = ({ children }) => {
     //remove user of list values
     const usersFiltered = users.filter(user => user.id !== userId);
 
-     //add new values to users
+    //add new values to users
     const newUsers = usersFiltered.map(user => {
 
-      if(user !== undefined && user.values !== undefined){
+      if (user !== undefined && user.values !== undefined) {
         const newListValueToUser = updateValuesOfListFromUser(user, newListValues)
 
-        return {...user, values: newListValueToUser };
+        return { ...user, values: newListValueToUser };
       }
       return user;
     }).filter(item => item !== undefined);

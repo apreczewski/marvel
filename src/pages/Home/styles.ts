@@ -13,62 +13,11 @@ export const Wrapper = styled.div`
   align-items: center;
 `;
 
-export const Background = styled.div`
-  position: absolute;
-  top: 0;
-  background: #1e1e1e;
-  height: 25rem;
-  width: 100%;
-
-  @media (max-width: 600px) {
-    height: 15rem;
-    width: 100%;
-  }
-`;
-
-
-export const Profile = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-
-  border: none;
-  text-decoration: none;
-
-  width: 40px;
-  height: 40px;
-  background: ${colors.greenyBlue};
-  border-radius: 50%;
-
+export const Logo = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  > svg {
-    width: 20px;
-    height: 20px;
-    color: #F4F8FA;
-  }
-
-  > img {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-  }
-
-  @media (max-width: 700px) {
-    top: 5px;
-    right: 5px;
-
-    width: 30px;
-    height: 30px;
-
-    > svg {
-      width: 15px;
-      height: 15px;
-      color: #F4F8FA;
-    }
-  }
+  margin-bottom: 10px;
 `;
 
 export const Container = styled.div`
@@ -118,63 +67,39 @@ export const Header = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
   background: #F4F8FA;
 
-  @media (max-width: 400px) {
-    /* padding: 5px; */
-  }
-
-  form {
+  > form {
     width: 100%;
     margin-right: 10px;
-
-    input {
-      text-decoration: none;
-      border: none;
-
-      color: ${colors.charcoalGreyTwo};
-      font-size: 12px;
-      width: 100%;
-      height: 40px;
-      border-radius: 25px;
-      padding: 0 20px;
-    }
   }
+`;
+
+export const AnchorInput = styled.div`
+  position: relative;
+  width: 100%;
+
+  input {
+    text-decoration: none;
+    border: none;
+
+    color: ${colors.charcoalGreyTwo};
+    font-size: 12px;
+    width: 100%;
+    height: 40px;
+    border-radius: 25px;
+    padding: 0 45px 0 20px;
+  }
+
 `;
 
 export const HeaderLeft = styled.div`
   display: flex;
   width: auto;
+  margin-right: 10px;
 `;
 
-export const TotalValues = styled.div`
-  width: 130px;
-  height: 35px;
-  padding: 10px 15px;
-  border-radius: 25px;
-  background: #e6e6e3;
-
-  color: #7a7a7a;
-  font-size: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  > span {
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    text-align: center;
-  }
-
-  @media (max-width: 500px) {
-    width: 100px;
-  }
-`;
-
-export const BtnAddUser = styled.button`
+export const BtnSelector = styled.button`
   width: 130px;
   height: 35px;
   padding: 10px 15px;
@@ -188,7 +113,6 @@ export const BtnAddUser = styled.button`
   border: none;
   border-radius: 25px;
   background: #e6e6e3;
-
   cursor: pointer;
 
   > svg {
@@ -215,140 +139,99 @@ export const BtnAddUser = styled.button`
     width: 100px;
   }
 
-  /* @media (max-width: 400px) {
-    width: 35px;
-    height: 35px;
-    margin: 3px;
-    border-radius: 50%;
-  } */
 `;
 
-
-interface ExpandProps {
-  isExpandHeader: boolean;
-}
-
-export const AnchorListTags = styled.div<ExpandProps>`
-  height: ${p => (p.isExpandHeader ? '167px' : '85px')};
-  background: #F4F8FA;
-  border-top-left-radius: 9px;
-  border-top-right-radius: 9px;
-  position: relative;
-  transition: height 0.8s ease-out;
-`;
-
-export const ListTags = styled.div`
-  width: 100%;
+export const BtnSearch = styled.button`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: auto;
   height: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, auto));
-  grid-template-rows: repeat(auto-fill, minmax(35px, 35px));
-  grid-gap: 5px;
-  justify-content: flex-start;
-  overflow: auto;
-  padding: 5px 0 5px 5px;
+  padding: 10px;
 
-  grid-template-areas: "avalue avalue";
-
-  ${scrollbarThin};
-
-  @media (max-width: 600px) {
-    justify-content: center;
-    align-items: center;
-  }
-`;
-
-export const BtnBase = styled.button`
-  width: 15px;
-  height: 15px;
-  background: #ffffff;
-  border: none;
-  text-decoration: none;
-
-  border-radius: 50px;
-  font-size: 10px;
-
+  font-size: 12px;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2;
-  color: #7a7a7a;
 
-  svg {
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+
+  cursor: pointer;
+  transition: background 0.5s;
+
+  > svg {
     color: #7a7a7a;
   }
 
-  :hover {
-    cursor: pointer;
-    background: #e6e6e3;
+  &:hover {
+    background: ${shade(0.10, '#e6e6e3')};
 
-    svg {
+    > svg {
       color: #15a38a;
     }
   }
 
   :active {
-    svg {
+    background: ${shade(0.15, '#e6e6e3')};
+
+    > svg {
       color: #15a38a;
     }
   }
+
+  @media (max-width: 500px) {
+    width: 100px;
+  }
+
 `;
 
-export const Division = styled.div`
-  position: relative;
-  width: 100%;
-  height: 15px;
-  background: #F4F8FA;
-  margin-bottom: 3px;
-
-  border-bottom-left-radius: 9px;
-  border-bottom-right-radius: 9px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const BtnHide = styled(BtnBase)`
-  width: 45px;
-  border-radius: 25px;
-  background: #F4F8FA;
-`;
+interface ExpandProps {
+  loading?: boolean;
+}
 
 export const Body = styled.div<ExpandProps>`
   position: relative;
   width: 100%;
-  ${p => (p.isExpandHeader ? css`
-    height: calc(100% - 231px);
-  ` : css`
-    height: calc(100% - 150px);
-  `
-  )}
-
+  height: calc(100% - 100px);
   background: #F9FCFE;
   border-radius: 9px;;
   padding: 0 0 5px 5px;
   display: flex;
   flex-direction: row;
 
+  ${p => p.loading && css`
+    justify-content: center;
+    align-items: center;
+  `};
+
   transition: height 0.8s ease-out;
 `;
 
-export const HideButtonFooter = styled(BtnBase)`
-  position: absolute;
-  height: 30px;
-  bottom: 0;
+export const NoAssets = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   svg {
-    font-size: 21px;
+    color: #FDF936;
+  }
+
+  span {
+    color: #7a7a7a;
+    font-size: 20px;
   }
 `;
 
-export const ListUsers = styled.div<ExpandProps>`
+export const List = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, auto));
-  grid-template-rows: repeat(auto-fill, minmax(257px, auto));
+  grid-template-rows: repeat(auto-fill, minmax(257px, fit-content));
   grid-gap: 9px;
   justify-content: flex-start;
   overflow: auto;

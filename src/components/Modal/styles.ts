@@ -1,4 +1,4 @@
-import styled, { keyframes, css } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import Modal from 'react-modal';
 import colors from '../../styles/colors';
 
