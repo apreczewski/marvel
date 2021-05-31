@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Wrapper, LinkDetails } from './styles';
 
-import { IAsset } from '../../pages/Home/index'
+import { IAsset } from '../../hooks/home'
 
 const Card: React.FC<IAsset> = (asset) => {
   const { /*id, type, */ thumbnail, name, description } = asset;

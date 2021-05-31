@@ -10,8 +10,6 @@ export const Wrapper = styled.div`
   width: 250px;
   box-shadow: 4px 4px 16px rgba(20, 43, 88, 0.05);
 
-  border-radius: 9px;
-
   display: flex;
   flex-direction: column;
   color: black;
@@ -32,7 +30,6 @@ export const Wrapper = styled.div`
     height: auto;
     max-width: 100%;
     object-fit: contain;
-    border-radius: 9px;
   }
 
 `;
@@ -53,7 +50,6 @@ export const LinkDetails = styled(Link)`
   justify-content: center;
   align-items: center;
 
-  border-radius: 9px;
   transition: background, height 0.5s;
 
   &:hover {

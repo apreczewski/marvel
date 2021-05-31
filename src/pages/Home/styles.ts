@@ -1,246 +1,305 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { shade } from 'polished';
 import { scrollbarThin } from '../../styles/scrollbar';
-import colors from '../../styles/colors';
+
 
 export const Wrapper = styled.div`
-  position: relative;
-  height: 100vh;
-  width: 100vw;
 
+`;
+
+export const Header = styled.div`
+  width: 100%;
+  height: fit-content;
+  background: #202020;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  form {
+    width: 33%;
+
+
+    @media (max-width: 845px) {
+      width: 70%;
+    }
+
+    @media (max-width: 500px) {
+      width: 66%;
+    }
+  }
+`;
+
+export const Anchor = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 51px;
+  padding: 0 100px;
+`;
+
+export const UserName = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  width: auto;
+  height: 51px;
+  padding: 0 25px;
+  border-left: 1px solid #393939;
+  border-right: 1px solid #393939;
+
 `;
 
 export const Logo = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
-`;
-
-export const Container = styled.div`
-  height: 45rem;
-  width: 65.1rem;
-  border-radius: 9px;
-
-  @media (max-width: 1400px) {
-    width: 49rem;
-  }
-
-  @media (max-width: 1100px) {
-    width: 33rem;
-  }
-
-  @media (max-width: 500px) {
-    width: 25rem;
-  }
-
-  @media (max-width: 400px) {
-    width: 21rem;
-  }
-
-  @media (max-height: 900px) {
-    height: 42rem;
-  }
-
-  @media (max-height: 800px) {
-    height: 38rem;
-  }
-
-  @media (max-height: 700px) {
-    height: 32rem;
-  }
-
-`;
-
-export const Header = styled.div`
-  position: relative;
   width: 100%;
-  height: 50px;
-  padding: 10px;
-  border-radius: 9px;
-  margin-bottom: 3px;
+  height: 52px;
+`;
 
+export const AnchorSubscribe = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  background: #F4F8FA;
+`;
 
-  > form {
-    width: 100%;
+export const Subscribe = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  height: 51px;
+  padding: 0 15px;
+
+  border-left: 1px solid #393939;
+  border-right: 1px solid #393939;
+
+  img {
+    height: 22px;
     margin-right: 10px;
   }
+
+  div {
+    width: 117px;
+    text-transform: uppercase;
+    text-align: center;
+
+    p {
+      font-size: 12px;
+    }
+
+    span {
+      font-size: 10px;
+      margin-top: 3px;
+
+    }
+  }
 `;
+
+export const Search = styled.a`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 51px;
+  padding: 0 15px;
+  border-right: 1px solid #393939;
+
+  cursor: pointer;
+
+  svg {
+    font-size: 20px;
+    color: #FFFFFF;
+  }
+`;
+
+
 
 export const AnchorInput = styled.div`
   position: relative;
-  width: 100%;
+
 
   input {
     text-decoration: none;
-    border: none;
-
-    color: ${colors.charcoalGreyTwo};
-    font-size: 12px;
     width: 100%;
     height: 40px;
-    border-radius: 25px;
+
+    font-size: 12px;
     padding: 0 45px 0 20px;
+    border-radius: 25px;
+    border: 1px solid #F2F2F2;
   }
 
-`;
+  button {
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    font-size: 12px;
 
-export const HeaderLeft = styled.div`
-  display: flex;
-  width: auto;
-  margin-right: 10px;
-`;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-export const BtnSelector = styled.button`
-  width: 130px;
-  height: 35px;
-  padding: 10px 15px;
-  margin: 0 10px;
+    border: none;
+    border-radius: 25px;
+    color: #393939;
+    background: transparent;
 
-  font-size: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    transition: background 0.5s;
+    cursor: pointer;
 
-  border: none;
-  border-radius: 25px;
-  background: #e6e6e3;
-  cursor: pointer;
+    &:hover {
+      background: ${shade(0.10, '#e6e6e3')};
 
-  > svg {
-    color: #7a7a7a;
-  }
+      > svg {
+        color: #E7412B;
+      }
+    }
 
-  &:hover {
-    background: ${shade(0.10, '#e6e6e3')};
+    :active {
+      background: ${shade(0.15, '#e6e6e3')};
 
-    > svg {
-      color: #15a38a;
+      > svg {
+        color: #E7412B;
+      }
     }
   }
-
-  :active {
-    background: ${shade(0.15, '#e6e6e3')};
-
-    > svg {
-      color: #15a38a;
-    }
-  }
-
-  @media (max-width: 500px) {
-    width: 100px;
-  }
-
 `;
 
-export const BtnSearch = styled.button`
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: auto;
-  height: 100%;
-  padding: 10px;
 
-  font-size: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  border: none;
-  border-radius: 50%;
-  background: transparent;
-
-  cursor: pointer;
-  transition: background 0.5s;
-
-  > svg {
-    color: #7a7a7a;
-  }
-
-  &:hover {
-    background: ${shade(0.10, '#e6e6e3')};
-
-    > svg {
-      color: #15a38a;
-    }
-  }
-
-  :active {
-    background: ${shade(0.15, '#e6e6e3')};
-
-    > svg {
-      color: #15a38a;
-    }
-  }
-
-  @media (max-width: 500px) {
-    width: 100px;
-  }
-
-`;
-
-interface ExpandProps {
-  loading?: boolean;
-}
-
-export const Body = styled.div<ExpandProps>`
-  position: relative;
+export const Menu = styled.div`
   width: 100%;
-  height: calc(100% - 100px);
-  background: #F9FCFE;
-  border-radius: 9px;;
-  padding: 0 0 5px 5px;
+  height: 40px;
+  background: #202020;
   display: flex;
   flex-direction: row;
-
-  ${p => p.loading && css`
-    justify-content: center;
-    align-items: center;
-  `};
-
-  transition: height 0.8s ease-out;
-`;
-
-export const NoAssets = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-top: 1px solid #393939;
 
-  svg {
-    color: #FDF936;
-  }
+  a {
+    width: 150px;
+    height: 100%;
+    padding: 0 18px;
 
-  span {
-    color: #7a7a7a;
-    font-size: 20px;
-  }
-`;
-
-export const List = styled.div`
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, auto));
-  grid-template-rows: repeat(auto-fill, minmax(257px, fit-content));
-  grid-gap: 9px;
-  justify-content: flex-start;
-  overflow: auto;
-  padding: 5px 0;
-
-  ${scrollbarThin};
-
-  @media (max-width: 600px) {
+    display: flex;
     justify-content: center;
     align-items: center;
+    text-transform: uppercase;
+    border-bottom: 2px solid #202020;
+    text-decoration: none;
+
+
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+    color: #999999;
+
+    &:hover {
+      color: #FFFFFF;
+      border-bottom: 2px solid #E7412B;
+    }
+
   }
 `;
+
+
+export const Body = styled.div`
+  height: calc(100vh - 80px);
+  overflow-y: auto;
+  ${scrollbarThin}
+`;
+
+export const SecondSession = styled.div`
+  width: 100%;
+  height: fit-content;
+  background: #FFFFFF;
+  padding: 20px 0;
+
+  h2 {
+    width: 100%;
+    color: #151515;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+`;
+
+export const TopCards = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  cursor: pointer;
+
+`;
+
+export const Card = styled.a`
+  text-decoration: none;
+  border-style : none;
+  width: 140px;
+  height: fit-content;
+  background: #E7412B;
+
+  img {
+    width: 100%;
+    height: 140px;
+    margin: none;
+  }
+
+  div {
+    height: 190px;
+    background: #151515;
+    padding: 20px;
+    text-decoration: none;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    text-align: center;
+
+    &:hover {
+      background: #E7412B;
+    }
+
+    h4 {
+      color: #FFFFFF;
+    }
+
+    h5 {
+      color: #999999;
+    }
+  }
+
+  & + a {
+    margin-left: 10px;
+  }
+
+
+`;
+
+export const TrirdSession = styled.div`
+  width: 100%;
+  height: 650px;
+  background: #F2F2F2;
+`;
+
+export const Left = styled.div``;
+
+export const Right = styled.div``;
+
+
