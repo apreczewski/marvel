@@ -72,11 +72,11 @@ const Input: React.FC<InputProps> = ({
       />
       {IconEye && <IconEye size={20} />}
       {IconAlert && <IconAlert size={20} />}
-      {error && (
+      {/* {error && (
         <Error title={error}>
           <FiAlertCircle size={20} color="#c53030" />
         </Error>
-      )}
+      )} */}
     </Container>
   );
 };

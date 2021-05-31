@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { uuid } from 'uuidv4';
 
 import { getListTypeById, getTypeById } from '../../services/endpoints'
-import { IAsset } from '../Home';
+import { IAsset } from '../../hooks/home';
 import Card from '../../components/Card';
 
 import { Wrapper, Left, Right, List, AnchorButtons, AnchorImg, BtnCustom } from './styles';

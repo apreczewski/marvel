@@ -23,7 +23,6 @@ export const PopoverCustom = styled(Popover)`
   width: fit-content;
   height: fit-content;
 
-  border-radius: 25px;
   background: #7a7a7a;
 
   display: flex;
@@ -43,7 +42,6 @@ export const BtnSelector = styled.button`
   align-items: center;
 
   border: none;
-  border-radius: 25px;
   background: #7a7a7a;
   color: white;
 

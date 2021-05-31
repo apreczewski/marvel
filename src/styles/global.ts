@@ -1,9 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
 
-//https://pigment.shapefactory.co/?a=34495b&b=728d9b
-// https://pigment.shapefactory.co/?a=c4250e&b=cb2d1b
-
-
 export default createGlobalStyle`
   * {
     margin: 0;
@@ -20,7 +16,7 @@ export default createGlobalStyle`
   }
 
   body, input, button {
-    font-family:"Roboto Slab", serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size:  16px;
   }
 

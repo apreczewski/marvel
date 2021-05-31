@@ -4,11 +4,9 @@ import { ToastProvider } from './toast';
 import { HomeProvider } from './home';
 
 const AppProvider: React.FC = ({ children }) => (
-  <ToastProvider>
-    <HomeProvider>
-      {children}
-    </HomeProvider>
-  </ToastProvider>
+  <HomeProvider>
+    {children}
+  </HomeProvider>
 );
 
 export default AppProvider;
