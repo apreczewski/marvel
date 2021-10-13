@@ -20,7 +20,7 @@ const icons = {
   error: <FiAlertCircle size={24} />,
 };
 
-const Toast: React.FC<ToastProps> = ({ message, style }) => {
+export const ToastType: React.FC<ToastProps> = ({ message, style }) => {
   const { removeToast } = useToast();
 
   useEffect(() => {
@@ -50,5 +50,3 @@ const Toast: React.FC<ToastProps> = ({ message, style }) => {
     </Container>
   );
 };
-
-export default Toast;

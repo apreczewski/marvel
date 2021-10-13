@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { shade } from 'polished';
+import { Form } from '@unform/web';
 import { scrollbarThin } from '../../styles/scrollbar';
 
 
@@ -9,27 +10,61 @@ export const Wrapper = styled.div`
 
 export const Header = styled.div`
   width: 100%;
-  height: fit-content;
+  height: 56px;
   background: #202020;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
 
-  form {
-    width: 33%;
+export const BtnSearch = styled.button`
+  position: absolute;
+  width: fit-content;
+  height: fit-content;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  font-size: 12px;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    @media (max-width: 845px) {
-      width: 70%;
+  border: none;
+  border-radius: 25px;
+  color: #393939;
+  background: transparent;
+
+  transition: background 0.5s;
+  cursor: pointer;
+
+  &:hover {
+    background: ${shade(0.10, '#e6e6e3')};
+
+    > svg {
+      color: #E7412B;
     }
+  }
 
-    @media (max-width: 500px) {
-      width: 66%;
+  :active {
+    background: ${shade(0.15, '#e6e6e3')};
+
+    > svg {
+      color: #E7412B;
     }
   }
 `;
+
+
+export const FormSearch = styled(Form)`
+  position: relative;
+  width: 50%;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+`;
+
 
 export const Anchor = styled.div`
   display: flex;
@@ -51,7 +86,6 @@ export const UserName = styled.div`
   padding: 0 25px;
   border-left: 1px solid #393939;
   border-right: 1px solid #393939;
-
 `;
 
 export const Logo = styled.div`
@@ -77,7 +111,6 @@ export const Subscribe = styled.div`
   width: fit-content;
   height: 51px;
   padding: 0 15px;
-
   border-left: 1px solid #393939;
   border-right: 1px solid #393939;
 
@@ -107,11 +140,9 @@ export const Search = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;
-
   height: 51px;
   padding: 0 15px;
   border-right: 1px solid #393939;
-
   cursor: pointer;
 
   svg {
@@ -176,7 +207,6 @@ export const AnchorInput = styled.div`
   }
 `;
 
-
 export const Menu = styled.div`
   width: 100%;
   height: 40px;
@@ -215,7 +245,14 @@ export const Menu = styled.div`
 
 
 export const Body = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: 10px;
   height: calc(100vh - 80px);
+  width: 100%;
+
   overflow-y: auto;
   ${scrollbarThin}
 `;
@@ -245,52 +282,6 @@ export const TopCards = styled.div`
 
 `;
 
-export const Card = styled.a`
-  text-decoration: none;
-  border-style : none;
-  width: 140px;
-  height: fit-content;
-  background: #E7412B;
-
-  img {
-    width: 100%;
-    height: 140px;
-    margin: none;
-  }
-
-  div {
-    height: 190px;
-    background: #151515;
-    padding: 20px;
-    text-decoration: none;
-
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-
-    text-align: center;
-
-    &:hover {
-      background: #E7412B;
-    }
-
-    h4 {
-      color: #FFFFFF;
-    }
-
-    h5 {
-      color: #999999;
-    }
-  }
-
-  & + a {
-    margin-left: 10px;
-  }
-
-
-`;
 
 export const TrirdSession = styled.div`
   width: 100%;
@@ -302,4 +293,43 @@ export const Left = styled.div``;
 
 export const Right = styled.div``;
 
+export const List = styled.div`
+
+
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, auto));
+  grid-template-rows: repeat(auto-fill, minmax(257px, fit-content));
+  grid-gap: 9px;
+  justify-content: flex-start;
+  overflow: auto;
+  padding: 5px 0;
+
+  ${scrollbarThin};
+
+  @media (max-width: 600px) {
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+
+
+export const NoAssets = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    color: #FDF936;
+  }
+
+  span {
+    color: #7a7a7a;
+    font-size: 20px;
+  }
+`;
 

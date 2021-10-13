@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { getListToType } from '../services/endpoints';
+import { getList } from '../services/endpoints';
 
 export interface ValueProps {
   id: string,
@@ -26,15 +26,10 @@ export interface IUrl {
 
 export interface IAsset {
   id: string;
-  urls: IUrl[];
-  resourceURI: string;
+  img: string;
   name: string;
-  thumbnail: {
-    extension: string;
-    path: string;
-  },
-  description: string;
-  type?: string;
+  num: string;
+  type: string[];
 }
 
 export interface ILoadData {
@@ -48,7 +43,7 @@ export interface HomeProps {
   loading?: boolean,
   assets: IAsset[],
   loadingValores?: boolean,
-  handleLoadData({ nameStartsWith, limit, type }: ILoadData): void,
+  handleLoadData(): void,
   handleCancelSignal(): void,
 }
 
@@ -64,47 +59,24 @@ export const HomeProvider: React.FC = ({ children }) => {
 
   const signal = useRef<ISignal>();
 
-  const handleLoadData = useCallback(async ({ nameStartsWith = null, limit = 100, type }) => {
-    const { call, source } = getListToType(type);
+  const handleLoadData = useCallback(async () => {
+    const { call, source } = getList();
 
     try {
       signal.current = source;
       setLoading(true);
 
-      const {
-        data: {
-          data: { results },
-        },
-      } = await call({
-        nameStartsWith,
-        limit,
-      }) || [];
+      const { data: { pokemon: assets } } = await call() || [];
 
-      console.log('results >> ', results.length);
-
-      if (results.length <= 0) {
-        setAssets(results);
-        setLoading(false);
-        return
-      }
-
-      const filterResults = results.map((result: IAsset) => {
-        if (result.thumbnail.path.search('image_not_available') > 0) {
-          return undefined
-        }
-
-        return result;
-      }).filter((item: object) => item !== undefined)
-
-      console.log('filterResults >> ', filterResults);
-
-      setAssets(filterResults);
+      setAssets(assets);
       setLoading(false);
     } catch (error) {
       console.log(error);
       setLoading(false);
     }
   }, []);
+
+
 
   const handleCancelSignal = () => {
     signal.current && signal.current.cancel('Request Canceled');

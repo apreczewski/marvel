@@ -6,10 +6,9 @@ import React, {
   InputHTMLAttributes,
 } from 'react';
 import { IconBaseProps } from 'react-icons';
-import { FiAlertCircle } from 'react-icons/fi';
 import { useField } from '@unform/core';
 
-import { Container, Error } from './styles';
+import { Container } from './styles';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -21,7 +20,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   width?: string;
 }
 
-const Input: React.FC<InputProps> = ({
+export const Inputdefault: React.FC<InputProps> = ({
   name,
   containerStyle = {},
   icon: Icon,
@@ -81,4 +80,3 @@ const Input: React.FC<InputProps> = ({
   );
 };
 
-export default Input;
